@@ -1,8 +1,8 @@
-<div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-5">
-    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-4">Activité récente</h3>
+<div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
+    <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-4">Activité récente</h3>
 
     @if($activities->isEmpty())
-        <p class="text-sm text-slate-500 text-center py-6">Aucune activité récente.</p>
+        <p class="text-sm text-gray-400 dark:text-slate-500 text-center py-6">Aucune activité récente.</p>
     @else
         <div class="space-y-3 max-h-96 overflow-y-auto">
             @foreach($activities as $activity)
@@ -22,14 +22,14 @@
                     </div>
                     <div class="min-w-0 flex-1">
                         <div class="flex items-center justify-between gap-2">
-                            <span class="text-sm font-mono text-slate-200">{{ $activity['message'] }}</span>
-                            <span class="text-[10px] text-slate-600 shrink-0">{{ $activity['date']?->diffForHumans() }}</span>
+                            <span class="text-sm font-mono text-gray-800 dark:text-slate-200">{{ $activity['message'] }}</span>
+                            <span class="text-[10px] text-gray-300 dark:text-slate-600 shrink-0">{{ $activity['date']?->diffForHumans() }}</span>
                         </div>
                         @if($activity['detail'])
-                            <div class="text-xs text-slate-500 truncate">{{ $activity['detail'] }}</div>
+                            <div class="text-xs text-gray-400 dark:text-slate-500 truncate">{{ $activity['detail'] }}</div>
                         @endif
                         @if($activity['user'])
-                            <div class="text-[10px] text-slate-600">{{ $activity['user'] }}</div>
+                            <div class="text-[10px] text-gray-300 dark:text-slate-600">{{ $activity['user'] }}</div>
                         @endif
                     </div>
                 </div>

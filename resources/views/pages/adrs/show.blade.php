@@ -34,22 +34,22 @@
             </div>
         @endif
 
-        <div class="text-xs text-slate-500 flex items-center gap-3">
+        <div class="text-xs text-gray-400 dark:text-slate-500 flex items-center gap-3">
             <span>{{ $adr->created_at->format('d/m/Y') }}</span>
             <span>Par {{ $adr->author?->name ?? '—' }}</span>
             @if($adr->modules->isNotEmpty())
                 <span>·</span>
                 @foreach($adr->modules as $mod)
-                    <span class="px-1.5 py-0.5 bg-slate-800 text-slate-400 rounded">{{ $mod->name }}</span>
+                    <span class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-slate-400 rounded">{{ $mod->name }}</span>
                 @endforeach
             @endif
         </div>
 
         @foreach([['Contexte', $adr->context], ['Décision', $adr->decision], ['Conséquences', $adr->consequences]] as [$title, $content])
             @if($content)
-                <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-5">
-                    <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-3">{{ $title }}</h3>
-                    <div class="text-slate-300 whitespace-pre-wrap">{{ $content }}</div>
+                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
+                    <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-3">{{ $title }}</h3>
+                    <div class="text-gray-600 dark:text-slate-300 whitespace-pre-wrap">{{ $content }}</div>
                 </div>
             @endif
         @endforeach

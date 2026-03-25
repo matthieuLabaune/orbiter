@@ -2,7 +2,7 @@
     {{-- Module filter --}}
     <div class="mb-4">
         <select wire:model.live="moduleFilter"
-                class="bg-slate-800 border border-slate-600 rounded-lg px-3 py-1.5 text-sm text-white focus:border-blue-500">
+                class="bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-1.5 text-sm text-gray-900 dark:text-white focus:border-blue-500">
             <option value="">Tous les modules</option>
             @foreach($modules as $module)
                 <option value="{{ $module->id }}">{{ $module->name }}</option>
@@ -17,33 +17,33 @@
                 $columnTasks = $tasks->get($status, collect());
                 $dotColors = ['slate' => 'bg-slate-500', 'blue' => 'bg-blue-500', 'red' => 'bg-red-500', 'emerald' => 'bg-emerald-500'];
             @endphp
-            <div class="bg-slate-900/50 border border-slate-700/30 rounded-xl p-3 min-h-[200px]">
+            <div class="bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-slate-700/30 rounded-xl p-3 min-h-[200px]">
                 {{-- Column header --}}
                 <div class="flex items-center justify-between mb-3 px-1">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full {{ $dotColors[$config['color']] ?? 'bg-slate-500' }}"></span>
-                        <span class="text-sm font-medium text-slate-300">{{ $config['label'] }}</span>
+                        <span class="text-sm font-medium text-gray-600 dark:text-slate-300">{{ $config['label'] }}</span>
                     </div>
-                    <span class="text-xs text-slate-600 font-mono">{{ $columnTasks->count() }}</span>
+                    <span class="text-xs text-gray-300 dark:text-slate-600 font-mono">{{ $columnTasks->count() }}</span>
                 </div>
 
                 {{-- Cards --}}
                 <div class="space-y-2">
                     @foreach($columnTasks as $task)
-                        <div class="bg-slate-800/80 border border-slate-700/50 rounded-lg p-3 hover:border-slate-600 transition-colors">
+                        <div class="bg-white dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700/50 rounded-lg p-3 hover:border-gray-300 dark:hover:border-slate-600 transition-colors">
                             <a href="{{ route('projects.tasks.show', [$project, $task]) }}"
-                               class="text-sm text-slate-200 hover:text-white font-medium leading-snug block mb-2">
+                               class="text-sm text-gray-800 dark:text-slate-200 hover:text-gray-900 dark:hover:text-white font-medium leading-snug block mb-2">
                                 {{ $task->title }}
                             </a>
 
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2">
                                     @if($task->module)
-                                        <span class="text-[10px] px-1.5 py-0.5 bg-slate-700 text-slate-400 rounded">{{ $task->module->name }}</span>
+                                        <span class="text-[10px] px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-500 dark:text-slate-400 rounded">{{ $task->module->name }}</span>
                                     @endif
                                 </div>
                                 @if($task->assignee)
-                                    <div class="w-5 h-5 rounded-full bg-slate-600 flex items-center justify-center text-[10px] font-medium text-slate-300"
+                                    <div class="w-5 h-5 rounded-full bg-gray-200 dark:bg-slate-600 flex items-center justify-center text-[10px] font-medium text-gray-600 dark:text-slate-300"
                                          title="{{ $task->assignee->name }}">
                                         {{ substr($task->assignee->name, 0, 1) }}
                                     </div>
