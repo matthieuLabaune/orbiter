@@ -4,9 +4,12 @@ namespace App\Livewire\Requirements;
 
 use App\Models\Project;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class RequirementList extends Component
 {
+    use WithPagination;
+
     public Project $project;
 
     public string $search = '';
@@ -15,6 +18,7 @@ class RequirementList extends Component
     public string $priorityFilter = '';
     public string $sortBy = 'ref';
     public string $sortDir = 'asc';
+    public int $perPage = 25;
 
     public function sort(string $column): void
     {
@@ -46,11 +50,6 @@ class RequirementList extends Component
         $this->resetPage();
     }
 
-    private function resetPage(): void
-    {
-        // Reset any pagination if added later
-    }
-
     public function render()
     {
         $modules = $this->project->modules()->orderBy('name')->get();
@@ -63,7 +62,7 @@ class RequirementList extends Component
             ->when($this->statusFilter, fn ($q) => $q->where('vv_status', $this->statusFilter))
             ->when($this->priorityFilter, fn ($q) => $q->where('priority', $this->priorityFilter))
             ->orderBy($this->sortBy, $this->sortDir)
-            ->get();
+            ->paginate($this->perPage);
 
         return view('livewire.requirements.requirement-list', [
             'requirements' => $requirements,
