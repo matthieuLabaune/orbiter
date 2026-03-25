@@ -13,8 +13,10 @@ trait HasSequentialRef
 
                 $lastRef = static::where('project_id', $projectId)
                     ->where('ref', 'like', $prefix . '-%')
-                    ->orderByRaw("CAST(SUBSTRING(ref FROM '\\d+$') AS INTEGER) DESC")
-                    ->value('ref');
+                    ->get(['ref'])
+                    ->sortByDesc(fn ($item) => (int) substr($item->ref, strlen($prefix) + 1))
+                    ->first()
+                    ?->ref;
 
                 if ($lastRef) {
                     $lastNumber = (int) substr($lastRef, strlen($prefix) + 1);
