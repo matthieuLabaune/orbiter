@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Tests & V&V</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Tests & V&V</h2>
             <a href="{{ route('projects.tests.create', $project) }}"
-               class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-colors">
+               class="inline-flex items-center gap-2 px-4 py-2 btn-primary transition-colors">
                 <x-lucide-plus class="w-4 h-4" />
                 Nouveau test
             </a>
@@ -18,7 +18,7 @@
         @endif
 
         {{-- Tabs --}}
-        <div class="flex items-center gap-1 border-b border-gray-200 dark:border-slate-700/50">
+        <div class="flex items-center gap-1 border-b" style="border-color: var(--orbiter-border);">
             <button @click="tab = 'list'" :class="tab === 'list' ? 'text-gray-900 dark:text-white border-b-2 border-blue-500' : 'text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'"
                     class="px-4 py-2 text-sm font-medium transition-colors cursor-pointer">
                 Liste
@@ -31,9 +31,9 @@
 
         {{-- List tab --}}
         <div x-show="tab === 'list'">
-            <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl overflow-hidden">
+            <div class="surface overflow-hidden">
                 <table class="w-full text-sm text-left">
-                    <thead class="text-xs text-gray-500 dark:text-slate-400 uppercase bg-gray-50 dark:bg-slate-800/50">
+                    <thead class="text-xs uppercase" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">
                         <tr>
                             <th class="px-4 py-3">Ref</th>
                             <th class="px-4 py-3">Titre</th>
@@ -42,7 +42,7 @@
                             <th class="px-4 py-3">Dernier résultat</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100 dark:divide-slate-700/50">
+                    <tbody class="divide-y" style="border-color: var(--orbiter-border);">
                         @forelse($tests as $test)
                             @php
                                 $lastExec = $test->executions->first();
@@ -52,9 +52,9 @@
                             <tr class="hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-colors">
                                 <td class="px-4 py-3">
                                     <a href="{{ route('projects.tests.show', [$project, $test]) }}"
-                                       class="font-mono text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">{{ $test->ref }}</a>
+                                       class="font-mono" style="color: var(--orbiter-accent);">{{ $test->ref }}</a>
                                 </td>
-                                <td class="px-4 py-3 text-gray-800 dark:text-slate-200">
+                                <td class="px-4 py-3" style="color: var(--orbiter-text-secondary);">
                                     <a href="{{ route('projects.tests.show', [$project, $test]) }}" class="hover:text-gray-900 dark:hover:text-white">{{ $test->title }}</a>
                                 </td>
                                 <td class="px-4 py-3">
@@ -63,7 +63,7 @@
                                 <td class="px-4 py-3">
                                     <div class="flex flex-wrap gap-1">
                                         @foreach($test->requirements as $req)
-                                            <span class="text-xs font-mono text-gray-500 dark:text-slate-400">{{ $req->ref }}</span>
+                                            <span class="text-xs font-mono" style="color: var(--orbiter-accent);">{{ $req->ref }}</span>
                                         @endforeach
                                         @if($test->requirements->isEmpty())
                                             <span class="text-xs text-gray-400 dark:text-slate-600">—</span>
@@ -80,7 +80,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-4 py-8 text-center text-gray-500 dark:text-slate-500">Aucun test.</td>
+                                <td colspan="5" class="px-4 py-8 text-center" style="color: var(--orbiter-text-muted);">Aucun test.</td>
                             </tr>
                         @endforelse
                     </tbody>

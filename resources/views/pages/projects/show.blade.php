@@ -2,23 +2,23 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="{{ route('projects.index') }}" class="text-slate-400 hover:text-white transition-colors">
+                <a href="{{ route('projects.index') }}" class="hover:opacity-80 transition-colors" style="color: var(--orbiter-text-muted);">
                     <x-lucide-arrow-left class="w-5 h-5" />
                 </a>
                 <div>
-                    <h2 class="text-xl font-semibold text-white">{{ $project->name }}</h2>
-                    <span class="text-xs text-slate-500 font-mono">{{ $project->slug }}</span>
+                    <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">{{ $project->name }}</h2>
+                    <span class="text-xs font-mono" style="color: var(--orbiter-text-muted);">{{ $project->slug }}</span>
                 </div>
             </div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('projects.requirements.index', $project) }}"
-                   class="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-slate-400 hover:text-white border border-slate-700 hover:border-slate-600 rounded-lg transition-colors">
+                   class="btn-secondary inline-flex items-center gap-2 px-3 py-1.5 text-sm transition-colors">
                     <x-lucide-list-checks class="w-4 h-4" />
                     Requirements
                 </a>
                 @can('update', $project)
                     <a href="{{ route('projects.edit', $project) }}"
-                       class="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-slate-400 hover:text-white border border-slate-700 hover:border-slate-600 rounded-lg transition-colors">
+                       class="btn-secondary inline-flex items-center gap-2 px-3 py-1.5 text-sm transition-colors">
                         <x-lucide-settings class="w-4 h-4" />
                     </a>
                 @endcan
@@ -40,8 +40,8 @@
 
         {{-- Description --}}
         @if($project->description)
-            <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                <p class="text-gray-600 dark:text-slate-300">{{ $project->description }}</p>
+            <div class="surface p-5">
+                <p style="color: var(--orbiter-text-secondary);">{{ $project->description }}</p>
             </div>
         @endif
 
@@ -62,12 +62,12 @@
             </div>
             <div>
                 {{-- Members --}}
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
+                <div class="surface p-5">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Membres</h3>
+                        <h3 class="text-sm font-medium uppercase tracking-wider" style="color: var(--orbiter-text-muted);">Membres</h3>
                         @can('manageMembers', $project)
                             <button onclick="document.getElementById('add-member-dialog').showModal()"
-                                    class="text-xs text-gray-400 dark:text-slate-500 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer">
+                                    class="text-xs hover:opacity-80 transition-colors cursor-pointer" style="color: var(--orbiter-text-muted);">
                                 <x-lucide-user-plus class="w-4 h-4" />
                             </button>
                         @endcan
@@ -76,12 +76,12 @@
                         @foreach($project->members as $member)
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2">
-                                    <div class="w-7 h-7 rounded-full bg-gray-200 dark:bg-slate-700 flex items-center justify-center text-xs font-medium text-gray-600 dark:text-slate-300">
+                                    <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-secondary);">
                                         {{ substr($member->name, 0, 1) }}
                                     </div>
                                     <div>
-                                        <div class="text-sm text-gray-800 dark:text-slate-200">{{ $member->name }}</div>
-                                        <div class="text-[10px] text-gray-300 dark:text-slate-600">{{ $member->email }}</div>
+                                        <div class="text-sm" style="color: var(--orbiter-text);">{{ $member->name }}</div>
+                                        <div class="text-[10px]" style="color: var(--orbiter-text-muted);">{{ $member->email }}</div>
                                     </div>
                                 </div>
                                 <x-ui.badge :color="$member->pivot->role === 'owner' ? 'amber' : ($member->pivot->role === 'member' ? 'blue' : 'slate')">
@@ -100,20 +100,20 @@
                 <form action="{{ route('projects.members.store', $project) }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Email</label>
+                        <label for="email" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Email</label>
                         <input type="email" name="email" id="email" required
-                               class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                               class="input-field w-full rounded-lg px-3 py-2 transition-colors"
                                placeholder="user@example.com">
                     </div>
                     <div>
-                        <label for="role" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Role</label>
+                        <label for="role" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Role</label>
                         <select name="role" id="role"
-                                class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                                class="input-field w-full rounded-lg px-3 py-2 transition-colors">
                             <option value="member">Member</option>
                             <option value="viewer">Viewer</option>
                         </select>
                     </div>
-                    <button type="submit" class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-colors">
+                    <button type="submit" class="btn-primary w-full px-4 py-2 text-sm font-medium transition-colors">
                         Ajouter
                     </button>
                 </form>

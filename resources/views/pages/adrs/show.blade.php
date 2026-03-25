@@ -7,14 +7,14 @@
                 </a>
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="font-mono text-blue-400">{{ $adr->ref }}</span>
+                        <span class="font-mono" style="color: var(--orbiter-accent);">{{ $adr->ref }}</span>
                         @php
                             $statusColors = ['proposed' => 'amber', 'accepted' => 'emerald', 'deprecated' => 'slate', 'superseded' => 'red'];
                             $statusLabels = ['proposed' => 'Proposé', 'accepted' => 'Accepté', 'deprecated' => 'Déprécié', 'superseded' => 'Remplacé'];
                         @endphp
                         <x-ui.badge :color="$statusColors[$adr->status] ?? 'slate'">{{ $statusLabels[$adr->status] ?? $adr->status }}</x-ui.badge>
                     </div>
-                    <h2 class="text-xl font-semibold text-white">{{ $adr->title }}</h2>
+                    <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">{{ $adr->title }}</h2>
                 </div>
             </div>
             @can('update', $project)
@@ -34,22 +34,22 @@
             </div>
         @endif
 
-        <div class="text-xs text-gray-400 dark:text-slate-500 flex items-center gap-3">
+        <div class="text-xs flex items-center gap-3" style="color: var(--orbiter-text-muted);">
             <span>{{ $adr->created_at->format('d/m/Y') }}</span>
             <span>Par {{ $adr->author?->name ?? '—' }}</span>
             @if($adr->modules->isNotEmpty())
                 <span>·</span>
                 @foreach($adr->modules as $mod)
-                    <span class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-slate-400 rounded">{{ $mod->name }}</span>
+                    <span class="px-1.5 py-0.5 rounded" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">{{ $mod->name }}</span>
                 @endforeach
             @endif
         </div>
 
         @foreach([['Contexte', $adr->context], ['Décision', $adr->decision], ['Conséquences', $adr->consequences]] as [$title, $content])
             @if($content)
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                    <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-3">{{ $title }}</h3>
-                    <div class="text-gray-600 dark:text-slate-300 whitespace-pre-wrap">{{ $content }}</div>
+                <div class="surface p-5">
+                    <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">{{ $title }}</h3>
+                    <div class="whitespace-pre-wrap" style="color: var(--orbiter-text-secondary);">{{ $content }}</div>
                 </div>
             @endif
         @endforeach

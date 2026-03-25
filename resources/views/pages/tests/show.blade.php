@@ -7,8 +7,8 @@
                 </a>
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="font-mono text-blue-400 text-lg">{{ $test->ref }}</span>
-                        <h2 class="text-xl font-semibold text-white">{{ $test->title }}</h2>
+                        <span class="font-mono text-lg" style="color: var(--orbiter-accent);">{{ $test->ref }}</span>
+                        <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">{{ $test->title }}</h2>
                     </div>
                     @php $typeColors = ['manual' => 'slate', 'automated' => 'blue', 'review' => 'purple']; @endphp
                     <x-ui.badge :color="$typeColors[$test->type] ?? 'slate'" class="mt-1">{{ $test->type }}</x-ui.badge>
@@ -41,30 +41,30 @@
             <div class="lg:col-span-2 space-y-6">
                 {{-- Procedure --}}
                 @if($test->procedure)
-                    <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                        <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-3">Procédure</h3>
-                        <div class="text-gray-600 dark:text-slate-300 whitespace-pre-wrap font-mono text-sm">{{ $test->procedure }}</div>
+                    <div class="surface p-5">
+                        <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">Procédure</h3>
+                        <div class="whitespace-pre-wrap font-mono text-sm" style="color: var(--orbiter-text-secondary);">{{ $test->procedure }}</div>
                     </div>
                 @endif
 
                 {{-- Expected result --}}
                 @if($test->expected_result)
-                    <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                        <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-3">Résultat attendu</h3>
-                        <div class="text-gray-600 dark:text-slate-300">{{ $test->expected_result }}</div>
+                    <div class="surface p-5">
+                        <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">Résultat attendu</h3>
+                        <div style="color: var(--orbiter-text-secondary);">{{ $test->expected_result }}</div>
                     </div>
                 @endif
 
                 {{-- Execution history --}}
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                    <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-3">
+                <div class="surface p-5">
+                    <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">
                         Historique des exécutions ({{ $test->executions->count() }})
                     </h3>
                     @if($test->executions->isEmpty())
-                        <p class="text-gray-400 dark:text-slate-500 text-sm">Aucune exécution enregistrée.</p>
+                        <p class="text-sm" style="color: var(--orbiter-text-muted);">Aucune exécution enregistrée.</p>
                     @else
                         <table class="w-full text-sm">
-                            <thead class="text-xs text-gray-400 dark:text-slate-500 uppercase">
+                            <thead class="text-xs uppercase" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">
                                 <tr>
                                     <th class="text-left py-2">Date</th>
                                     <th class="text-left py-2">Résultat</th>
@@ -72,16 +72,16 @@
                                     <th class="text-left py-2">Notes</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-100 dark:divide-slate-700/50">
+                            <tbody class="divide-y" style="border-color: var(--orbiter-border);">
                                 @foreach($test->executions->sortByDesc('executed_at') as $exec)
                                     @php $resultColors = ['pass' => 'emerald', 'fail' => 'red', 'skip' => 'amber']; @endphp
                                     <tr>
-                                        <td class="py-2 text-gray-500 dark:text-slate-400 text-xs">{{ $exec->executed_at?->format('d/m/Y H:i') }}</td>
+                                        <td class="py-2 text-xs" style="color: var(--orbiter-text-muted);">{{ $exec->executed_at?->format('d/m/Y H:i') }}</td>
                                         <td class="py-2">
                                             <x-ui.badge :color="$resultColors[$exec->result] ?? 'slate'">{{ $exec->result }}</x-ui.badge>
                                         </td>
-                                        <td class="py-2 text-gray-500 dark:text-slate-400">{{ $exec->executor?->name ?? '—' }}</td>
-                                        <td class="py-2 text-gray-400 dark:text-slate-500 text-xs">{{ $exec->notes ?? '—' }}</td>
+                                        <td class="py-2" style="color: var(--orbiter-text-muted);">{{ $exec->executor?->name ?? '—' }}</td>
+                                        <td class="py-2 text-xs" style="color: var(--orbiter-text-muted);">{{ $exec->notes ?? '—' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -92,17 +92,17 @@
 
             {{-- Sidebar --}}
             <div class="space-y-6">
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                    <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-3">Exigences couvertes</h3>
+                <div class="surface p-5">
+                    <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">Exigences couvertes</h3>
                     @forelse($test->requirements as $req)
                         <div class="flex items-center gap-2 py-1.5">
                             <a href="{{ route('projects.requirements.show', [$project, $req]) }}"
-                               class="font-mono text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 text-sm">{{ $req->ref }}</a>
-                            <span class="text-sm text-gray-600 dark:text-slate-300 truncate">{{ $req->title }}</span>
+                               class="font-mono text-sm" style="color: var(--orbiter-accent);">{{ $req->ref }}</a>
+                            <span class="text-sm truncate" style="color: var(--orbiter-text-secondary);">{{ $req->title }}</span>
                             <x-project.vv-status :status="$req->vv_status" />
                         </div>
                     @empty
-                        <p class="text-xs text-gray-400 dark:text-slate-500">Aucune exigence liée.</p>
+                        <p class="text-xs" style="color: var(--orbiter-text-muted);">Aucune exigence liée.</p>
                     @endforelse
                 </div>
             </div>
@@ -113,7 +113,7 @@
             <form action="{{ route('projects.tests.executions.store', [$project, $test]) }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
-                    <label class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-2">Résultat</label>
+                    <label class="block text-sm font-medium mb-2" style="color: var(--orbiter-text-muted);">Résultat</label>
                     <div class="flex gap-3">
                         @foreach(['pass' => 'Pass', 'fail' => 'Fail', 'skip' => 'Skip'] as $val => $label)
                             @php
@@ -133,12 +133,12 @@
                     </div>
                 </div>
                 <div>
-                    <label for="notes" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Notes</label>
+                    <label for="notes" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Notes</label>
                     <textarea name="notes" id="notes" rows="3"
-                              class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
+                              class="w-full input-field text-sm"
                               placeholder="Détails de l'exécution..."></textarea>
                 </div>
-                <button type="submit" class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-colors">
+                <button type="submit" class="w-full px-4 py-2 btn-primary transition-colors">
                     Enregistrer
                 </button>
             </form>

@@ -1,40 +1,40 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('projects.diagrams.index', $project) }}" class="text-slate-400 hover:text-white transition-colors">
+            <a href="{{ route('projects.diagrams.index', $project) }}" class="transition-colors" style="color: var(--orbiter-text-muted);">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
-            <h2 class="text-xl font-semibold text-white">Nouveau diagramme</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Nouveau diagramme</h2>
         </div>
     </x-slot>
 
     <div class="max-w-4xl mx-auto">
         <form action="{{ route('projects.diagrams.store', $project) }}" method="POST"
-              class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-6 space-y-6">
+              class="surface p-6 space-y-6">
             @csrf
 
             <div>
-                <label for="title" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Titre</label>
+                <label for="title" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Titre</label>
                 <input type="text" name="title" id="title" value="{{ old('title') }}" required autofocus
-                       class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                       class="input-field"
                        placeholder="Architecture des modules">
                 @error('title') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label for="mermaid_source" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Source Mermaid</label>
+                <label for="mermaid_source" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Source Mermaid</label>
                 <textarea name="mermaid_source" id="mermaid_source" rows="15"
-                          class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white font-mono text-sm placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          class="input-field font-mono"
                           placeholder="graph TB&#10;    A[Module A] --> B[Module B]&#10;    B --> C[Module C]">{{ old('mermaid_source', "graph TB\n    A[Module A] --> B[Module B]\n    B --> C[Module C]") }}</textarea>
                 @error('mermaid_source') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
-                <p class="mt-1 text-xs text-gray-400 dark:text-slate-500">
-                    <a href="https://mermaid.js.org/intro/" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">Documentation Mermaid.js</a>
+                <p class="mt-1 text-xs" style="color: var(--orbiter-text-muted);">
+                    <a href="https://mermaid.js.org/intro/" target="_blank" rel="noopener" style="color: var(--orbiter-accent);">Documentation Mermaid.js</a>
                 </p>
             </div>
 
             <div class="flex items-center justify-end gap-3">
-                <a href="{{ route('projects.diagrams.index', $project) }}" class="px-4 py-2 text-sm text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-colors">Annuler</a>
-                <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-colors">
+                <a href="{{ route('projects.diagrams.index', $project) }}" class="px-4 py-2 text-sm transition-colors" style="color: var(--orbiter-text-muted);">Annuler</a>
+                <button type="submit" class="btn-primary">
                     Créer le diagramme
                 </button>
             </div>
