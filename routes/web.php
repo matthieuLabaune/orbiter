@@ -7,6 +7,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestExecutionController;
 use App\Http\Controllers\AdrController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\DiagramController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Tasks
     Route::resource('projects.tasks', TaskController::class);
+
+    // Diagrams
+    Route::resource('projects.diagrams', DiagramController::class);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
