@@ -14,18 +14,7 @@ class RequirementController extends Controller
     {
         Gate::authorize('view', $project);
 
-        $modules = $project->modules()->orderBy('name')->get();
-
-        $requirements = $project->requirements()
-            ->with(['module', 'tests'])
-            ->when($request->search, fn ($q, $s) => $q->where('title', 'like', "%{$s}%"))
-            ->when($request->module, fn ($q, $m) => $q->where('module_id', $m))
-            ->when($request->status, fn ($q, $s) => $q->where('vv_status', $s))
-            ->when($request->priority, fn ($q, $p) => $q->where('priority', $p))
-            ->orderBy('ref')
-            ->get();
-
-        return view('pages.requirements.index', compact('project', 'requirements', 'modules'));
+        return view('pages.requirements.index', compact('project'));
     }
 
     public function create(Project $project)
