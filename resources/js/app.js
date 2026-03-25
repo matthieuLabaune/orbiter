@@ -1,9 +1,6 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-Alpine.start();
+// Alpine.js is loaded by Livewire — do NOT import it here
 
 // Mermaid.js — diagrammes
 import mermaid from 'mermaid';
