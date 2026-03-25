@@ -1,0 +1,51 @@
+name: 'Orbiter Readiness Check'
+description: 'Check deploy readiness from Orbiter — blocks if NO-GO'
+inputs:
+  orbiter-url:
+    description: 'Orbiter instance URL'
+    required: true
+  orbiter-token:
+    description: 'Orbiter API token'
+    required: true
+  project-slug:
+    description: 'Orbiter project slug'
+    required: true
+outputs:
+  result:
+    description: 'go or no_go'
+    value: ${{ steps.check.outputs.result }}
+  reason:
+    description: 'Blocking items if NO-GO'
+    value: ${{ steps.check.outputs.reason }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Check deploy readiness
+      id: check
+      shell: bash
+      run: |
+        RESPONSE=$(curl -s \
+          "${{ inputs.orbiter-url }}/api/projects/${{ inputs.project-slug }}/deploy-readiness" \
+          -H "Authorization: Bearer ${{ inputs.orbiter-token }}")
+
+        RESULT=$(echo "$RESPONSE" | python3 -c "import json,sys; print(json.load(sys.stdin).get('result','unknown'))")
+        echo "result=$RESULT" >> $GITHUB_OUTPUT
+
+        if [ "$RESULT" = "no_go" ]; then
+          BLOCKING=$(echo "$RESPONSE" | python3 -c "
+        import json, sys
+        data = json.load(sys.stdin)
+        items = data.get('blocking_items', [])
+        for item in items:
+            print(f\"  - {item.get('ref','?')}: {item.get('reason','?')}\")
+        ")
+          echo "reason<<EOF" >> $GITHUB_OUTPUT
+          echo "$BLOCKING" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "::error::Deploy Readiness: NO-GO"
+          echo "$BLOCKING"
+          exit 1
+        else
+          echo "::notice::Deploy Readiness: GO"
+        fi
