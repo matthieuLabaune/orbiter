@@ -1,58 +1,135 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Orbiter
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Project management built for traceability and AI-assisted development.**
 
-## About Laravel
+Orbiter est un outil de gestion de projet open source inspiré de l'ingénierie système NASA/SpaceX, adapté au développement logiciel. Il offre une traçabilité complète **exigence → test → code → preuve**, pensé pour être exploitable par des humains ET par des agents IA.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Pourquoi Orbiter ?
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Les outils classiques (Jira, Linear, Notion) trackent des tickets. Orbiter tracke des **exigences** et leur **preuve de satisfaction** — comme en ingénierie système, mais adapté au logiciel.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Traçabilité bidirectionnelle** — De l'exigence au commit, du commit à l'exigence. Si un lien manque, Orbiter le signale.
+- **V&V séparées** — "Vérifié" (les tests passent en CI) ≠ "Validé" (le client confirme en staging). Les deux sont trackés.
+- **Risk Score FMEA** — Chaque exigence a un score de risque : Impact × Probabilité × (6 - Détectabilité). On teste en priorité ce qui est risqué.
+- **Deploy Readiness** — Avant chaque déploiement, un check GO/NO-GO automatique par module. Inspiré des Flight Readiness Reviews NASA.
+- **Context Brief IA** — Pour chaque exigence, un briefing contextuel structuré (REQ + module + ADR + tests + lessons + risque) consommable par Claude Code ou tout agent IA.
 
-## Learning Laravel
+## Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+Laravel 13 (PHP 8.4)
+├── Blade Components (UI)
+├── Livewire 4 (réactivité serveur)
+├── Tailwind CSS 4 (styling)
+├── PostgreSQL 16 (JSONB)
+├── FrankenPHP (Octane)
+├── Pest PHP (tests)
+└── Mermaid.js + frappe-gantt (seul JS externe)
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**Philosophie : simplicité radicale.** Pas de Vue, pas de React, pas d'Inertia, pas de SPA. Le navigateur fait le travail (`<dialog>`, Popover API, `<details>/<summary>`). Inspiré par [Spatie — "Rethinking our frontend future"](https://spatie.be/blog/rethinking-our-frontend-future).
 
-## Contributing
+## Quick Start
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/matthieuLabaune/orbiter.git
+cd orbiter
+docker compose up -d
+docker compose exec app php artisan migrate --seed
+```
 
-## Code of Conduct
+Ouvrir http://localhost:8080 — Login : `demo@orbiter.dev` / `password`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Le seeder crée un projet **"Orbiter v1"** avec des données réalistes : 7 modules, 13 exigences, 10 tests, 16 tâches, 4 ADR, 3 lessons learned, 1 baseline et 2 anomalies.
 
-## Security Vulnerabilities
+## Modules
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Module | Description |
+|--------|-------------|
+| **Projects** | Projets, membres et rôles |
+| **Modules** | Découpage fonctionnel avec dépendances inter-modules |
+| **Requirements** | Exigences avec statut V&V, versioning et Risk Score FMEA |
+| **Tests & V&V** | Registre de tests, exécutions, matrice de traçabilité |
+| **Planning** | Tâches avec dépendances, Gantt et Kanban |
+| **Architecture** | Diagrammes Mermaid auto-générés depuis les modules |
+| **ADR** | Architecture Decision Records avec liens modules/exigences |
+| **Dashboard** | Santé projet par module, alertes, activité récente |
+| **Deploy Readiness** | Revue GO/NO-GO automatique avant déploiement |
+| **Lessons Learned** | Capitalisation des apprentissages par module |
+| **Baselines** | Snapshots immuables de l'état du projet à chaque release |
+| **Anomaly Taxonomy** | Classification : Anomalie / Non-conformité / Défaut |
+| **Context Brief IA** | Briefing contextuel par exigence pour agents IA |
 
-## License
+## Architecture
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```mermaid
+graph TB
+    subgraph Core
+        P[Projects] --> M[Modules]
+        M --> R[Requirements]
+        R --> T[Tests & V&V]
+        M --> TK[Tasks]
+    end
+    subgraph Architecture
+        M --> D[Diagrams]
+        M --> ADR[ADR]
+    end
+    subgraph Industrial
+        R --> RS[Risk Score]
+        R --> DR[Deploy Readiness]
+        M --> LL[Lessons Learned]
+        P --> BL[Baselines]
+        R --> AN[Anomalies]
+    end
+    subgraph Integration
+        GH[GitHub Webhooks] --> R
+        CI[CI Pipeline] --> DR
+    end
+```
+
+## Mesure d'avancement
+
+L'avancement d'un projet ne se mesure pas en tickets fermés. Orbiter mesure 4 axes :
+
+| Axe | Question | Indicateur |
+|-----|----------|-----------|
+| **Formalisation** | Les besoins sont-ils écrits ? | % d'exigences avec critères d'acceptation |
+| **Couverture** | Les exigences sont-elles testées ? | % d'exigences avec au moins un test |
+| **Vérification** | Les tests passent-ils ? | % d'exigences dont tous les tests passent |
+| **Validation** | Le client confirme-t-il ? | % d'exigences validées en staging |
+
+L'avancement réel = taux de validation. Les 3 autres sont des indicateurs avancés.
+
+## Développement
+
+```bash
+docker compose up -d                              # Lancer les containers
+docker compose exec app php artisan migrate       # Migrations
+docker compose exec app php artisan test           # Tests (Pest)
+docker compose exec app php artisan db:seed        # Données démo
+```
+
+### Conventions de commit
+
+```
+<type>(<module>): description courte
+
+REQ-XXX - Titre de l'exigence
+Covers: TEST-XXXa, TEST-XXXb
+```
+
+Types : `feat`, `fix`, `test`, `refactor`, `docs`, `chore`, `infra`
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [`CLAUDE.md`](CLAUDE.md) | Guide de développement pour Claude Code |
+| [`docs/architecture.md`](docs/architecture.md) | Architecture technique avec diagramme Mermaid |
+| [`docs/methodology.md`](docs/methodology.md) | Méthodologie "Project as Context" |
+| [`docs/glossary.md`](docs/glossary.md) | Glossaire des termes Orbiter |
+| [`docs/adr/`](docs/adr/) | Architecture Decision Records |
+
+## Licence
+
+[MIT](LICENSE)
