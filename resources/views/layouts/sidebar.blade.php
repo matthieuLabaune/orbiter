@@ -49,6 +49,11 @@
                 <x-lucide-gantt-chart class="w-4 h-4" />
                 Planning
             </a>
+            <a href="{{ route('projects.diagrams.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.diagrams.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
+                <x-lucide-network class="w-4 h-4" />
+                Architecture
+            </a>
             <a href="{{ route('projects.adrs.index', $p) }}"
                class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.adrs.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
                 <x-lucide-file-text class="w-4 h-4" />

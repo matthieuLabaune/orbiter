@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMemberController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestExecutionController;
 use App\Http\Controllers\AdrController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\DiagramController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/projects/{project}/members/{user}', [ProjectMemberController::class, 'update'])->name('projects.members.update');
     Route::delete('/projects/{project}/members/{user}', [ProjectMemberController::class, 'destroy'])->name('projects.members.destroy');
 
+    // Modules
+    Route::resource('projects.modules', ModuleController::class);
+
     // Requirements
     Route::resource('projects.requirements', RequirementController::class);
 
@@ -39,6 +44,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Tasks
     Route::resource('projects.tasks', TaskController::class);
+
+    // Diagrams
+    Route::resource('projects.diagrams', DiagramController::class);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
