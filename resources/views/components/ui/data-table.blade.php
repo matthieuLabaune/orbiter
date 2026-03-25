@@ -1,9 +1,9 @@
 @props(['headers' => []])
 
-<div {{ $attributes->merge(['class' => 'overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700']) }}>
+<div {{ $attributes->merge(['class' => 'overflow-x-auto rounded-lg']) }} style="border: 1px solid var(--orbiter-border);">
     <table class="w-full text-sm text-left">
         @if(count($headers))
-            <thead class="text-xs text-gray-500 dark:text-slate-400 uppercase bg-gray-50 dark:bg-slate-800/50">
+            <thead class="text-xs uppercase" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">
                 <tr>
                     @foreach($headers as $header)
                         <th class="px-4 py-3">{{ $header }}</th>
@@ -11,7 +11,7 @@
                 </tr>
             </thead>
         @endif
-        <tbody class="divide-y divide-gray-100 dark:divide-slate-700">
+        <tbody class="divide-y" style="--tw-divide-opacity: 1; border-color: var(--orbiter-border);">
             {{ $slot }}
         </tbody>
     </table>
