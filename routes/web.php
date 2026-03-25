@@ -9,6 +9,10 @@ use App\Http\Controllers\TestExecutionController;
 use App\Http\Controllers\AdrController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\DiagramController;
+use App\Http\Controllers\DeployReadinessController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\AnomalyController;
+use App\Http\Controllers\BaselineController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +51,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Diagrams
     Route::resource('projects.diagrams', DiagramController::class);
+
+    // Deploy Readiness
+    Route::get('/projects/{project}/deploy-readiness', [DeployReadinessController::class, 'index'])->name('projects.deploy-readiness');
+
+    // Lessons Learned
+    Route::resource('projects.lessons', LessonController::class)->only(['index', 'create', 'store', 'show']);
+
+    // Anomalies
+    Route::resource('projects.anomalies', AnomalyController::class)->only(['index', 'create', 'store', 'show']);
+
+    // Baselines
+    Route::resource('projects.baselines', BaselineController::class)->only(['index', 'create', 'store', 'show']);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

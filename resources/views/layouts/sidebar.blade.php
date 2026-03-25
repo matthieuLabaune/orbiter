@@ -60,20 +60,24 @@
                 ADR
             </a>
 
-            <div class="text-xs text-slate-500 uppercase tracking-wider px-2 mt-4 mb-2">Industriel</div>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+            <div class="text-xs text-gray-400 dark:text-slate-500 uppercase tracking-wider px-2 mt-4 mb-2">Industriel</div>
+            <a href="{{ route('projects.deploy-readiness', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.deploy-readiness') ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800/50' }}">
                 <x-lucide-rocket class="w-4 h-4" />
                 Deploy Readiness
             </a>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+            <a href="{{ route('projects.anomalies.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.anomalies.*') ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800/50' }}">
                 <x-lucide-triangle-alert class="w-4 h-4" />
                 Anomalies
             </a>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+            <a href="{{ route('projects.lessons.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.lessons.*') ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800/50' }}">
                 <x-lucide-lightbulb class="w-4 h-4" />
                 Lessons Learned
             </a>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+            <a href="{{ route('projects.baselines.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.baselines.*') ? 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800/50' }}">
                 <x-lucide-archive class="w-4 h-4" />
                 Baselines
             </a>
