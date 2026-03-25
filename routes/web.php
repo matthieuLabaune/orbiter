@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/methodology', function () {
+    return view('methodology');
+})->name('methodology');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard redirects to projects
     Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');

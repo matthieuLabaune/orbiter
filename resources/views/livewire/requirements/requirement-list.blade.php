@@ -101,4 +101,11 @@
             </tbody>
         </table>
     </div>
+
+    {{-- Pagination --}}
+    @if($requirements->hasPages())
+        <div class="mt-4">
+            {{ $requirements->links() }}
+        </div>
+    @endif
 </div>

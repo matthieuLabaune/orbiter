@@ -8,12 +8,35 @@
     </div>
 
     <!-- Project selector -->
-    <div class="px-3 py-3 border-b border-gray-200 dark:border-slate-700/50">
-        <div class="text-xs text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-1">Projet</div>
-        @php $currentProject = request()->route('project'); @endphp
-        <div class="text-sm text-gray-800 dark:text-slate-200 font-medium truncate">
-            {{ $currentProject?->name ?? 'Sélectionner...' }}
-        </div>
+    @php
+        $currentProject = request()->route('project');
+        $userProjects = auth()->user()->projects ?? collect();
+    @endphp
+    <div class="px-3 py-2 border-b border-gray-200 dark:border-slate-700/50">
+        <details class="group">
+            <summary class="flex items-center justify-between cursor-pointer list-none px-2 py-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-slate-800/50 transition-colors">
+                <div class="min-w-0">
+                    <div class="text-[10px] text-gray-400 dark:text-slate-500 uppercase tracking-wider">Projet</div>
+                    <div class="text-sm text-gray-800 dark:text-slate-200 font-medium truncate">
+                        {{ $currentProject?->name ?? 'Sélectionner...' }}
+                    </div>
+                </div>
+                <x-lucide-chevrons-up-down class="w-4 h-4 text-gray-400 dark:text-slate-500 shrink-0" />
+            </summary>
+            <div class="mt-1 space-y-0.5">
+                @foreach($userProjects as $proj)
+                    <a href="{{ route('projects.show', $proj) }}"
+                       class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ $currentProject?->id === $proj->id ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800/50' }}">
+                        <span class="truncate">{{ $proj->name }}</span>
+                    </a>
+                @endforeach
+                <a href="{{ route('projects.index') }}"
+                   class="flex items-center gap-2 px-2 py-1.5 rounded-md text-xs text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800/50 transition-colors">
+                    <x-lucide-layout-grid class="w-3 h-3" />
+                    Tous les projets
+                </a>
+            </div>
+        </details>
     </div>
 
     <!-- Navigation -->

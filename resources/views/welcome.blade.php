@@ -125,6 +125,64 @@
         </div>
     </section>
 
+    {{-- Comparison table (#36) --}}
+    <section class="max-w-5xl mx-auto px-6 pb-24">
+        <h2 class="text-2xl font-bold text-white text-center mb-8">Pourquoi pas Jira ?</h2>
+        <div class="bg-slate-900/40 border border-slate-700/30 rounded-xl overflow-hidden">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-700/30">
+                        <th class="px-5 py-3 text-left text-slate-500 font-medium w-1/4">Aspect</th>
+                        <th class="px-5 py-3 text-left text-slate-500 font-medium w-[37.5%]">Jira / Linear / Notion</th>
+                        <th class="px-5 py-3 text-left text-blue-400 font-medium w-[37.5%]">Orbiter</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700/20">
+                    @foreach([
+                        ['Avancement', 'Tickets fermés / total', '4 axes mesurables : formalisation → couverture → vérification → validation'],
+                        ['Traçabilité', 'Liens manuels entre tickets', 'Auto-parsing REQ-XXX dans commits et PR — zéro effort'],
+                        ['Tests', 'CI passe ou échoue globalement', 'Chaque test tracé vers une exigence, statut V&V par REQ'],
+                        ['Risque', 'Estimation subjective (S/M/L)', 'Score FMEA quantifié : Impact × Probabilité × Détectabilité'],
+                        ['Déploiement', '"On y va ?" en réunion', 'GO/NO-GO automatique par module avec blocking items'],
+                        ['IA', 'L\'agent lit le ticket', 'Context Brief structuré avec tests + ADR + lessons + risque'],
+                    ] as $row)
+                        <tr class="hover:bg-slate-800/20 transition-colors">
+                            <td class="px-5 py-3 text-white font-medium">{{ $row[0] }}</td>
+                            <td class="px-5 py-3 text-slate-500">{{ $row[1] }}</td>
+                            <td class="px-5 py-3 text-slate-300">{{ $row[2] }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center mt-6">
+            <a href="{{ route('methodology') }}" class="text-sm text-blue-400 hover:text-blue-300 transition-colors">
+                En savoir plus sur la méthodologie Orbiter &rarr;
+            </a>
+        </div>
+    </section>
+
+    {{-- Use cases (#37) --}}
+    <section class="max-w-5xl mx-auto px-6 pb-24">
+        <h2 class="text-2xl font-bold text-white text-center mb-8">Cas d'usage concrets</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @foreach([
+                ['icon' => 'shield-check', 'title' => 'Avant un déploiement', 'desc' => 'Le Deploy Readiness vérifie que 100% des P0 sont vérifiées. Si TEST-007 fail, le déploiement est bloqué avec la raison exacte. Plus de "j\'avais pas vu ce bug".', 'badge' => 'GO / NO-GO'],
+                ['icon' => 'brain', 'title' => 'Quand Claude Code implémente', 'desc' => 'L\'agent appelle /context-brief et reçoit : l\'exigence, les tests à satisfaire, les ADR du module, les lessons learned. Il code avec le contexte complet.', 'badge' => 'Context Brief'],
+                ['icon' => 'triangle-alert', 'title' => 'Quand un bug apparaît', 'desc' => 'Est-ce une anomalie, une non-conformité ou un défaut ? Orbiter classe, relie à l\'exigence violée, repasse le statut V&V à "échoué" et notifie.', 'badge' => 'Taxonomy'],
+            ] as $case)
+                <div class="bg-slate-900/40 border border-slate-700/30 rounded-xl p-6">
+                    <x-dynamic-component :component="'lucide-' . $case['icon']" class="w-8 h-8 text-blue-400 mb-4" />
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="text-white font-semibold">{{ $case['title'] }}</h3>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3">{{ $case['desc'] }}</p>
+                    <span class="text-[10px] px-2 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20">{{ $case['badge'] }}</span>
+                </div>
+            @endforeach
+        </div>
+    </section>
+
     {{-- Stack --}}
     <section class="max-w-4xl mx-auto px-6 pb-24 text-center">
         <h2 class="text-2xl font-bold text-white mb-4">Simplicité radicale</h2>
@@ -153,6 +211,7 @@
             Orbiter — MIT License
         </div>
         <div class="flex items-center gap-4">
+            <a href="{{ route('methodology') }}" class="hover:text-slate-400 transition-colors">Méthodologie</a>
             <a href="https://github.com/matthieuLabaune/orbiter" target="_blank" rel="noopener" class="hover:text-slate-400 transition-colors">GitHub</a>
         </div>
     </footer>

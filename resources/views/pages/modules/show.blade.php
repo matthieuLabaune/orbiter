@@ -34,23 +34,23 @@
 
         {{-- Description --}}
         @if($module->description)
-            <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-5">
-                <p class="text-slate-300">{{ $module->description }}</p>
+            <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
+                <p class="text-gray-600 dark:text-slate-300">{{ $module->description }}</p>
             </div>
         @endif
 
         {{-- Exigences --}}
         <div>
-            <h3 class="text-lg font-semibold text-white mb-4">Exigences</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Exigences</h3>
             @if($module->requirements->isEmpty())
-                <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-8 text-center">
-                    <x-lucide-list-checks class="w-8 h-8 text-slate-600 mx-auto mb-3" />
-                    <p class="text-slate-500">Aucune exigence pour ce module.</p>
+                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-8 text-center">
+                    <x-lucide-list-checks class="w-8 h-8 text-gray-300 dark:text-slate-600 mx-auto mb-3" />
+                    <p class="text-gray-400 dark:text-slate-500">Aucune exigence pour ce module.</p>
                 </div>
             @else
-                <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
+                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl overflow-hidden">
                     <table class="w-full text-sm">
-                        <thead class="text-xs text-slate-400 uppercase bg-slate-800/50">
+                        <thead class="text-xs text-gray-500 dark:text-slate-400 uppercase bg-gray-50 dark:bg-slate-800/50">
                             <tr>
                                 <th class="px-4 py-3 text-left">Ref</th>
                                 <th class="px-4 py-3 text-left">Titre</th>
@@ -58,19 +58,19 @@
                                 <th class="px-4 py-3 text-right">Tests</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-700/50">
+                        <tbody class="divide-y divide-gray-100 dark:divide-slate-700/50">
                             @foreach($module->requirements as $requirement)
-                                <tr class="hover:bg-slate-800/30 transition-colors">
+                                <tr class="hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-colors">
                                     <td class="px-4 py-3">
-                                        <a href="#" class="font-mono text-blue-400 hover:text-blue-300">
+                                        <a href="#" class="font-mono text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">
                                             {{ $requirement->ref }}
                                         </a>
                                     </td>
-                                    <td class="px-4 py-3 text-slate-300">{{ $requirement->title }}</td>
+                                    <td class="px-4 py-3 text-gray-600 dark:text-slate-300">{{ $requirement->title }}</td>
                                     <td class="px-4 py-3">
                                         <x-project.vv-status :status="$requirement->vv_status ?? 'untested'" />
                                     </td>
-                                    <td class="px-4 py-3 text-right text-slate-400">{{ $requirement->tests->count() }}</td>
+                                    <td class="px-4 py-3 text-right text-gray-500 dark:text-slate-400">{{ $requirement->tests->count() }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -81,18 +81,18 @@
 
         {{-- Dépendances --}}
         <div>
-            <h3 class="text-lg font-semibold text-white mb-4">Dépendances</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Dépendances</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-5">
-                    <h4 class="text-sm font-medium text-slate-400 mb-3">Dépend de</h4>
+                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
+                    <h4 class="text-sm font-medium text-gray-500 dark:text-slate-400 mb-3">Dépend de</h4>
                     @if($module->dependencies->isEmpty())
-                        <p class="text-sm text-slate-500">Aucune dépendance.</p>
+                        <p class="text-sm text-gray-400 dark:text-slate-500">Aucune dépendance.</p>
                     @else
                         <ul class="space-y-2">
                             @foreach($module->dependencies as $dep)
                                 <li>
                                     <a href="{{ route('projects.modules.show', [$project, $dep]) }}"
-                                       class="text-sm text-blue-400 hover:text-blue-300 transition-colors">
+                                       class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors">
                                         {{ $dep->name }}
                                     </a>
                                 </li>
@@ -101,16 +101,16 @@
                     @endif
                 </div>
 
-                <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-5">
-                    <h4 class="text-sm font-medium text-slate-400 mb-3">Dépendants</h4>
+                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
+                    <h4 class="text-sm font-medium text-gray-500 dark:text-slate-400 mb-3">Dépendants</h4>
                     @if($module->dependents->isEmpty())
-                        <p class="text-sm text-slate-500">Aucun module dépendant.</p>
+                        <p class="text-sm text-gray-400 dark:text-slate-500">Aucun module dépendant.</p>
                     @else
                         <ul class="space-y-2">
                             @foreach($module->dependents as $dep)
                                 <li>
                                     <a href="{{ route('projects.modules.show', [$project, $dep]) }}"
-                                       class="text-sm text-blue-400 hover:text-blue-300 transition-colors">
+                                       class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors">
                                         {{ $dep->name }}
                                     </a>
                                 </li>
@@ -123,26 +123,26 @@
 
         {{-- Tâches --}}
         <div>
-            <h3 class="text-lg font-semibold text-white mb-4">Tâches</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Tâches</h3>
             @if($module->tasks->isEmpty())
-                <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-8 text-center">
-                    <x-lucide-circle-check class="w-8 h-8 text-slate-600 mx-auto mb-3" />
-                    <p class="text-slate-500">Aucune tâche pour ce module.</p>
+                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-8 text-center">
+                    <x-lucide-circle-check class="w-8 h-8 text-gray-300 dark:text-slate-600 mx-auto mb-3" />
+                    <p class="text-gray-400 dark:text-slate-500">Aucune tâche pour ce module.</p>
                 </div>
             @else
-                <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
+                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl overflow-hidden">
                     <table class="w-full text-sm">
-                        <thead class="text-xs text-slate-400 uppercase bg-slate-800/50">
+                        <thead class="text-xs text-gray-500 dark:text-slate-400 uppercase bg-gray-50 dark:bg-slate-800/50">
                             <tr>
                                 <th class="px-4 py-3 text-left">Titre</th>
                                 <th class="px-4 py-3 text-left">Statut</th>
                                 <th class="px-4 py-3 text-left">Priorité</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-700/50">
+                        <tbody class="divide-y divide-gray-100 dark:divide-slate-700/50">
                             @foreach($module->tasks as $task)
-                                <tr class="hover:bg-slate-800/30 transition-colors">
-                                    <td class="px-4 py-3 text-slate-300">{{ $task->title }}</td>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-colors">
+                                    <td class="px-4 py-3 text-gray-600 dark:text-slate-300">{{ $task->title }}</td>
                                     <td class="px-4 py-3">
                                         <x-ui.badge :color="match($task->status ?? 'todo') { 'done' => 'emerald', 'in_progress' => 'blue', default => 'slate' }">
                                             {{ $task->status ?? 'todo' }}

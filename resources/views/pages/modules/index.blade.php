@@ -26,9 +26,9 @@
 
         @if($modules->isEmpty())
             <div class="text-center py-16">
-                <x-lucide-boxes class="w-12 h-12 text-slate-600 mx-auto mb-4" />
-                <h3 class="text-lg font-medium text-slate-300 mb-2">Aucun module</h3>
-                <p class="text-slate-500 mb-6">Créez votre premier module pour commencer.</p>
+                <x-lucide-boxes class="w-12 h-12 text-gray-300 dark:text-slate-600 mx-auto mb-4" />
+                <h3 class="text-lg font-medium text-gray-600 dark:text-slate-300 mb-2">Aucun module</h3>
+                <p class="text-gray-400 dark:text-slate-500 mb-6">Créez votre premier module pour commencer.</p>
                 @can('update', $project)
                     <a href="{{ route('projects.modules.create', $project) }}"
                        class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-colors">
@@ -41,9 +41,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach($modules as $module)
                     <a href="{{ route('projects.modules.show', [$project, $module]) }}"
-                       class="block bg-slate-900/80 border border-slate-700/50 rounded-xl p-5 hover:border-blue-500/50 hover:bg-slate-900 transition-all group">
+                       class="block bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5 hover:border-blue-500/50 hover:bg-gray-50 dark:hover:bg-slate-900 transition-all group">
                         <div class="flex items-start justify-between mb-2">
-                            <h3 class="text-white font-semibold group-hover:text-blue-400 transition-colors">
+                            <h3 class="text-gray-900 dark:text-white font-semibold group-hover:text-blue-400 transition-colors">
                                 {{ $module->name }}
                             </h3>
                             <x-ui.badge :color="match($module->status) { 'active' => 'emerald', 'deprecated' => 'amber', default => 'slate' }">
@@ -51,13 +51,13 @@
                             </x-ui.badge>
                         </div>
 
-                        <p class="text-xs text-slate-500 mb-2">{{ $module->owner->name ?? 'N/A' }}</p>
+                        <p class="text-xs text-gray-400 dark:text-slate-500 mb-2">{{ $module->owner->name ?? 'N/A' }}</p>
 
                         @if($module->description)
-                            <p class="text-sm text-slate-400 mb-4 line-clamp-2">{{ $module->description }}</p>
+                            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 line-clamp-2">{{ $module->description }}</p>
                         @endif
 
-                        <div class="flex items-center gap-4 text-xs text-slate-500">
+                        <div class="flex items-center gap-4 text-xs text-gray-400 dark:text-slate-500">
                             <span class="flex items-center gap-1">
                                 <x-lucide-list-checks class="w-3.5 h-3.5" />
                                 {{ $module->requirements_count }} REQ
