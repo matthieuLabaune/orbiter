@@ -1,10 +1,10 @@
 <div>
     @if($ganttTasks->isEmpty())
-        <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-8 text-center text-gray-400 dark:text-slate-500">
+        <div class="surface p-8 text-center" style="color: var(--orbiter-text-muted);">
             Aucune tâche avec des dates pour afficher le Gantt.
         </div>
     @else
-        <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-4 overflow-x-auto">
+        <div class="surface p-4 overflow-x-auto">
             <div id="gantt-container" wire:ignore></div>
         </div>
 

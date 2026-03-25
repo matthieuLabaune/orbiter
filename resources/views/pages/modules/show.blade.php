@@ -2,22 +2,22 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="{{ route('projects.modules.index', $project) }}" class="text-slate-400 hover:text-white transition-colors">
+                <a href="{{ route('projects.modules.index', $project) }}" class="hover:opacity-80 transition-colors" style="color: var(--orbiter-text-muted);">
                     <x-lucide-arrow-left class="w-5 h-5" />
                 </a>
                 <div>
-                    <h2 class="text-xl font-semibold text-white">{{ $module->name }}</h2>
+                    <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">{{ $module->name }}</h2>
                     <div class="flex items-center gap-2 mt-0.5">
                         <x-ui.badge :color="match($module->status) { 'active' => 'emerald', 'deprecated' => 'amber', default => 'slate' }">
                             {{ $module->status }}
                         </x-ui.badge>
-                        <span class="text-xs text-slate-500">par {{ $module->owner->name ?? 'N/A' }}</span>
+                        <span class="text-xs" style="color: var(--orbiter-text-muted);">par {{ $module->owner->name ?? 'N/A' }}</span>
                     </div>
                 </div>
             </div>
             @can('update', $project)
                 <a href="{{ route('projects.modules.edit', [$project, $module]) }}"
-                   class="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-slate-400 hover:text-white border border-slate-700 hover:border-slate-600 rounded-lg transition-colors">
+                   class="btn-secondary inline-flex items-center gap-2 px-3 py-1.5 text-sm transition-colors">
                     <x-lucide-settings class="w-4 h-4" />
                     Modifier
                 </a>
@@ -34,23 +34,23 @@
 
         {{-- Description --}}
         @if($module->description)
-            <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                <p class="text-gray-600 dark:text-slate-300">{{ $module->description }}</p>
+            <div class="surface p-5">
+                <p style="color: var(--orbiter-text-secondary);">{{ $module->description }}</p>
             </div>
         @endif
 
         {{-- Exigences --}}
         <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Exigences</h3>
+            <h3 class="text-lg font-semibold mb-4" style="color: var(--orbiter-text);">Exigences</h3>
             @if($module->requirements->isEmpty())
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-8 text-center">
-                    <x-lucide-list-checks class="w-8 h-8 text-gray-300 dark:text-slate-600 mx-auto mb-3" />
-                    <p class="text-gray-400 dark:text-slate-500">Aucune exigence pour ce module.</p>
+                <div class="surface p-8 text-center">
+                    <x-lucide-list-checks class="w-8 h-8 mx-auto mb-3" style="color: var(--orbiter-text-muted);" />
+                    <p style="color: var(--orbiter-text-muted);">Aucune exigence pour ce module.</p>
                 </div>
             @else
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl overflow-hidden">
+                <div class="surface overflow-hidden">
                     <table class="w-full text-sm">
-                        <thead class="text-xs text-gray-500 dark:text-slate-400 uppercase bg-gray-50 dark:bg-slate-800/50">
+                        <thead class="text-xs uppercase" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">
                             <tr>
                                 <th class="px-4 py-3 text-left">Ref</th>
                                 <th class="px-4 py-3 text-left">Titre</th>
@@ -58,19 +58,19 @@
                                 <th class="px-4 py-3 text-right">Tests</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100 dark:divide-slate-700/50">
+                        <tbody class="divide-y" style="--tw-divide-opacity: 1; border-color: var(--orbiter-border);">
                             @foreach($module->requirements as $requirement)
-                                <tr class="hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-colors">
+                                <tr class="hover:opacity-90 transition-colors">
                                     <td class="px-4 py-3">
-                                        <a href="#" class="font-mono text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">
+                                        <a href="#" class="font-mono hover:opacity-80" style="color: var(--orbiter-accent);">
                                             {{ $requirement->ref }}
                                         </a>
                                     </td>
-                                    <td class="px-4 py-3 text-gray-600 dark:text-slate-300">{{ $requirement->title }}</td>
+                                    <td class="px-4 py-3" style="color: var(--orbiter-text-secondary);">{{ $requirement->title }}</td>
                                     <td class="px-4 py-3">
                                         <x-project.vv-status :status="$requirement->vv_status ?? 'untested'" />
                                     </td>
-                                    <td class="px-4 py-3 text-right text-gray-500 dark:text-slate-400">{{ $requirement->tests->count() }}</td>
+                                    <td class="px-4 py-3 text-right" style="color: var(--orbiter-text-secondary);">{{ $requirement->tests->count() }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -81,18 +81,18 @@
 
         {{-- Dépendances --}}
         <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Dépendances</h3>
+            <h3 class="text-lg font-semibold mb-4" style="color: var(--orbiter-text);">Dépendances</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                    <h4 class="text-sm font-medium text-gray-500 dark:text-slate-400 mb-3">Dépend de</h4>
+                <div class="surface p-5">
+                    <h4 class="text-sm font-medium mb-3" style="color: var(--orbiter-text-muted);">Dépend de</h4>
                     @if($module->dependencies->isEmpty())
-                        <p class="text-sm text-gray-400 dark:text-slate-500">Aucune dépendance.</p>
+                        <p class="text-sm" style="color: var(--orbiter-text-muted);">Aucune dépendance.</p>
                     @else
                         <ul class="space-y-2">
                             @foreach($module->dependencies as $dep)
                                 <li>
                                     <a href="{{ route('projects.modules.show', [$project, $dep]) }}"
-                                       class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors">
+                                       class="text-sm hover:opacity-80 transition-colors" style="color: var(--orbiter-accent);">
                                         {{ $dep->name }}
                                     </a>
                                 </li>
@@ -101,16 +101,16 @@
                     @endif
                 </div>
 
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-                    <h4 class="text-sm font-medium text-gray-500 dark:text-slate-400 mb-3">Dépendants</h4>
+                <div class="surface p-5">
+                    <h4 class="text-sm font-medium mb-3" style="color: var(--orbiter-text-muted);">Dépendants</h4>
                     @if($module->dependents->isEmpty())
-                        <p class="text-sm text-gray-400 dark:text-slate-500">Aucun module dépendant.</p>
+                        <p class="text-sm" style="color: var(--orbiter-text-muted);">Aucun module dépendant.</p>
                     @else
                         <ul class="space-y-2">
                             @foreach($module->dependents as $dep)
                                 <li>
                                     <a href="{{ route('projects.modules.show', [$project, $dep]) }}"
-                                       class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors">
+                                       class="text-sm hover:opacity-80 transition-colors" style="color: var(--orbiter-accent);">
                                         {{ $dep->name }}
                                     </a>
                                 </li>
@@ -123,26 +123,26 @@
 
         {{-- Tâches --}}
         <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Tâches</h3>
+            <h3 class="text-lg font-semibold mb-4" style="color: var(--orbiter-text);">Tâches</h3>
             @if($module->tasks->isEmpty())
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-8 text-center">
-                    <x-lucide-circle-check class="w-8 h-8 text-gray-300 dark:text-slate-600 mx-auto mb-3" />
-                    <p class="text-gray-400 dark:text-slate-500">Aucune tâche pour ce module.</p>
+                <div class="surface p-8 text-center">
+                    <x-lucide-circle-check class="w-8 h-8 mx-auto mb-3" style="color: var(--orbiter-text-muted);" />
+                    <p style="color: var(--orbiter-text-muted);">Aucune tâche pour ce module.</p>
                 </div>
             @else
-                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl overflow-hidden">
+                <div class="surface overflow-hidden">
                     <table class="w-full text-sm">
-                        <thead class="text-xs text-gray-500 dark:text-slate-400 uppercase bg-gray-50 dark:bg-slate-800/50">
+                        <thead class="text-xs uppercase" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">
                             <tr>
                                 <th class="px-4 py-3 text-left">Titre</th>
                                 <th class="px-4 py-3 text-left">Statut</th>
                                 <th class="px-4 py-3 text-left">Priorité</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100 dark:divide-slate-700/50">
+                        <tbody class="divide-y" style="--tw-divide-opacity: 1; border-color: var(--orbiter-border);">
                             @foreach($module->tasks as $task)
-                                <tr class="hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-colors">
-                                    <td class="px-4 py-3 text-gray-600 dark:text-slate-300">{{ $task->title }}</td>
+                                <tr class="hover:opacity-90 transition-colors">
+                                    <td class="px-4 py-3" style="color: var(--orbiter-text-secondary);">{{ $task->title }}</td>
                                     <td class="px-4 py-3">
                                         <x-ui.badge :color="match($task->status ?? 'todo') { 'done' => 'emerald', 'in_progress' => 'blue', default => 'slate' }">
                                             {{ $task->status ?? 'todo' }}

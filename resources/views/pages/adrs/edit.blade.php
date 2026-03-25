@@ -4,50 +4,50 @@
             <a href="{{ route('projects.adrs.show', [$project, $adr]) }}" class="text-slate-400 hover:text-white transition-colors">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
-            <h2 class="text-xl font-semibold text-white">Modifier <span class="font-mono text-blue-400">{{ $adr->ref }}</span></h2>
+            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Modifier <span class="font-mono" style="color: var(--orbiter-accent);">{{ $adr->ref }}</span></h2>
         </div>
     </x-slot>
 
     <div class="max-w-2xl mx-auto">
         <form action="{{ route('projects.adrs.update', [$project, $adr]) }}" method="POST"
-              class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-6 space-y-6">
+              class="surface p-6 space-y-6">
             @csrf
             @method('PUT')
 
             <div>
-                <label for="title" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Titre</label>
+                <label for="title" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Titre</label>
                 <input type="text" name="title" id="title" value="{{ old('title', $adr->title) }}" required
-                       class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                       class="w-full input-field">
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label for="status" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Statut</label>
+                    <label for="status" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Statut</label>
                     <select name="status" id="status" required
-                            class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white focus:border-blue-500">
+                            class="w-full input-field">
                         @foreach(['proposed' => 'Proposé', 'accepted' => 'Accepté', 'deprecated' => 'Déprécié', 'superseded' => 'Remplacé'] as $val => $label)
                             <option value="{{ $val }}" {{ old('status', $adr->status) == $val ? 'selected' : '' }}>{{ $label }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <label for="superseded_by" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Remplacé par</label>
+                    <label for="superseded_by" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Remplacé par</label>
                     <input type="text" name="superseded_by" id="superseded_by" value="{{ old('superseded_by', $adr->superseded_by) }}"
-                           class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white placeholder-slate-500 focus:border-blue-500"
+                           class="w-full input-field"
                            placeholder="ADR-XXX">
                 </div>
             </div>
 
             @foreach([['context', 'Contexte', $adr->context], ['decision', 'Décision', $adr->decision], ['consequences', 'Conséquences', $adr->consequences]] as [$field, $label, $value])
                 <div>
-                    <label for="{{ $field }}" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">{{ $label }}</label>
+                    <label for="{{ $field }}" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">{{ $label }}</label>
                     <textarea name="{{ $field }}" id="{{ $field }}" rows="4"
-                              class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500">{{ old($field, $value) }}</textarea>
+                              class="w-full input-field">{{ old($field, $value) }}</textarea>
                 </div>
             @endforeach
 
             <div>
-                <label class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-2">Modules impactés</label>
+                <label class="block text-sm font-medium mb-2" style="color: var(--orbiter-text-muted);">Modules impactés</label>
                 @php $linkedModules = $adr->modules->pluck('id')->toArray(); @endphp
                 <div class="flex flex-wrap gap-2">
                     @foreach($modules as $module)

@@ -1,5 +1,5 @@
-<div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
-    <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-4">
+<div class="surface p-5">
+    <h3 class="text-sm font-medium uppercase tracking-wider mb-4" style="color: var(--orbiter-text-muted);">
         Alertes
         @if($alerts->isNotEmpty())
             <span class="ml-2 px-1.5 py-0.5 text-xs rounded-full bg-red-500/20 text-red-400 border border-red-500/30">
@@ -21,15 +21,15 @@
                     $iconColors = ['critical' => 'text-red-500', 'error' => 'text-red-400', 'warning' => 'text-amber-500'];
                 @endphp
                 <a href="{{ $alert['url'] }}"
-                   class="flex items-start gap-3 p-3 rounded-lg border-l-2 {{ $borderColors[$alert['type']] ?? 'border-l-slate-500' }} bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+                   class="flex items-start gap-3 p-3 rounded-lg border-l-2 {{ $borderColors[$alert['type']] ?? 'border-l-slate-500' }} hover:opacity-90 transition-colors" style="background: var(--orbiter-surface-2);">
                     <x-dynamic-component :component="'lucide-' . $alert['icon']" class="w-4 h-4 mt-0.5 shrink-0 {{ $iconColors[$alert['type']] ?? 'text-slate-400' }}" />
                     <div class="min-w-0">
-                        <div class="text-sm text-gray-800 dark:text-slate-200">{{ $alert['message'] }}</div>
+                        <div class="text-sm" style="color: var(--orbiter-text);">{{ $alert['message'] }}</div>
                         @if($alert['detail'])
-                            <div class="text-xs text-gray-400 dark:text-slate-500 truncate">{{ $alert['detail'] }}</div>
+                            <div class="text-xs truncate" style="color: var(--orbiter-text-muted);">{{ $alert['detail'] }}</div>
                         @endif
                         @if($alert['module'])
-                            <span class="inline-block mt-1 text-[10px] px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-500 dark:text-slate-400 rounded">{{ $alert['module'] }}</span>
+                            <span class="inline-block mt-1 text-[10px] px-1.5 py-0.5 rounded" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-secondary);">{{ $alert['module'] }}</span>
                         @endif
                     </div>
                 </a>
