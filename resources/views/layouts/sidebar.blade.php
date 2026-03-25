@@ -7,11 +7,12 @@
         </a>
     </div>
 
-    <!-- Project selector placeholder -->
+    <!-- Project selector -->
     <div class="px-3 py-3 border-b border-slate-700/50">
         <div class="text-xs text-slate-500 uppercase tracking-wider mb-1">Projet</div>
+        @php $currentProject = request()->route('project'); @endphp
         <div class="text-sm text-slate-200 font-medium truncate">
-            {{ request()->route('project')?->name ?? 'Sélectionner...' }}
+            {{ $currentProject?->name ?? 'Sélectionner...' }}
         </div>
     </div>
 
@@ -25,28 +26,31 @@
             Dashboard
         </a>
 
-        @if($currentProject = request()->route('project'))
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+        @if($currentProject)
+            @php $p = $currentProject; @endphp
+
+            <a href="{{ route('projects.modules.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.modules.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
                 <x-lucide-boxes class="w-4 h-4" />
                 Modules
             </a>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+            <a href="{{ route('projects.requirements.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.requirements.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
                 <x-lucide-list-checks class="w-4 h-4" />
                 Requirements
             </a>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+            <a href="{{ route('projects.tests.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.tests.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
                 <x-lucide-test-tubes class="w-4 h-4" />
                 Tests & V&V
             </a>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+            <a href="{{ route('projects.tasks.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.tasks.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
                 <x-lucide-gantt-chart class="w-4 h-4" />
                 Planning
             </a>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
-                <x-lucide-network class="w-4 h-4" />
-                Architecture
-            </a>
-            <a href="#" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors">
+            <a href="{{ route('projects.adrs.index', $p) }}"
+               class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors {{ request()->routeIs('projects.adrs.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800/50' }}">
                 <x-lucide-file-text class="w-4 h-4" />
                 ADR
             </a>
@@ -74,7 +78,7 @@
     <!-- User -->
     <div class="p-3 border-t border-slate-700/50">
         <div class="flex items-center gap-2">
-            <div class="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center text-xs font-medium">
+            <div class="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center text-xs font-medium text-slate-300">
                 {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
             </div>
             <div class="flex-1 min-w-0">
