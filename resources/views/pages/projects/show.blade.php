@@ -40,8 +40,8 @@
 
         {{-- Description --}}
         @if($project->description)
-            <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-5">
-                <p class="text-slate-300">{{ $project->description }}</p>
+            <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
+                <p class="text-gray-600 dark:text-slate-300">{{ $project->description }}</p>
             </div>
         @endif
 
@@ -62,12 +62,12 @@
             </div>
             <div>
                 {{-- Members --}}
-                <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl p-5">
+                <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 rounded-xl p-5">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wider">Membres</h3>
+                        <h3 class="text-sm font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Membres</h3>
                         @can('manageMembers', $project)
                             <button onclick="document.getElementById('add-member-dialog').showModal()"
-                                    class="text-xs text-slate-500 hover:text-white transition-colors cursor-pointer">
+                                    class="text-xs text-gray-400 dark:text-slate-500 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer">
                                 <x-lucide-user-plus class="w-4 h-4" />
                             </button>
                         @endcan
@@ -76,12 +76,12 @@
                         @foreach($project->members as $member)
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2">
-                                    <div class="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center text-xs font-medium text-slate-300">
+                                    <div class="w-7 h-7 rounded-full bg-gray-200 dark:bg-slate-700 flex items-center justify-center text-xs font-medium text-gray-600 dark:text-slate-300">
                                         {{ substr($member->name, 0, 1) }}
                                     </div>
                                     <div>
-                                        <div class="text-sm text-slate-200">{{ $member->name }}</div>
-                                        <div class="text-[10px] text-slate-600">{{ $member->email }}</div>
+                                        <div class="text-sm text-gray-800 dark:text-slate-200">{{ $member->name }}</div>
+                                        <div class="text-[10px] text-gray-300 dark:text-slate-600">{{ $member->email }}</div>
                                     </div>
                                 </div>
                                 <x-ui.badge :color="$member->pivot->role === 'owner' ? 'amber' : ($member->pivot->role === 'member' ? 'blue' : 'slate')">
@@ -100,15 +100,15 @@
                 <form action="{{ route('projects.members.store', $project) }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
-                        <label for="email" class="block text-sm font-medium text-slate-300 mb-1">Email</label>
+                        <label for="email" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Email</label>
                         <input type="email" name="email" id="email" required
-                               class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                               class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                placeholder="user@example.com">
                     </div>
                     <div>
-                        <label for="role" class="block text-sm font-medium text-slate-300 mb-1">Role</label>
+                        <label for="role" class="block text-sm font-medium text-gray-600 dark:text-slate-300 mb-1">Role</label>
                         <select name="role" id="role"
-                                class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                                class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg px-3 py-2 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
                             <option value="member">Member</option>
                             <option value="viewer">Viewer</option>
                         </select>
