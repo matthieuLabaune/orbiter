@@ -13,8 +13,8 @@ $items = [
 <div {{ $attributes->merge(['class' => 'space-y-2']) }}>
     @foreach($items as $item)
         <div class="flex items-center justify-between text-xs">
-            <span class="text-slate-400">{{ $item['label'] }}</span>
-            <span class="text-slate-300 font-mono">{{ $item['value'] }}/{{ $total }}</span>
+            <span class="text-gray-500 dark:text-slate-400">{{ $item['label'] }}</span>
+            <span class="text-gray-700 dark:text-slate-300 font-mono">{{ $item['value'] }}/{{ $total }}</span>
         </div>
         <x-ui.progress-bar :value="$item['value']" :max="$total" :color="$item['color']" :showLabel="false" />
     @endforeach
