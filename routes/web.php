@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMemberController;
+use App\Http\Controllers\RequirementController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\TestExecutionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +23,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/projects/{project}/members', [ProjectMemberController::class, 'store'])->name('projects.members.store');
     Route::patch('/projects/{project}/members/{user}', [ProjectMemberController::class, 'update'])->name('projects.members.update');
     Route::delete('/projects/{project}/members/{user}', [ProjectMemberController::class, 'destroy'])->name('projects.members.destroy');
+
+    // Requirements
+    Route::resource('projects.requirements', RequirementController::class);
+
+    // Tests
+    Route::resource('projects.tests', TestController::class);
+    Route::post('/projects/{project}/tests/{test}/executions', [TestExecutionController::class, 'store'])
+        ->name('projects.tests.executions.store');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
