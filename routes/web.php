@@ -5,6 +5,8 @@ use App\Http\Controllers\ProjectMemberController;
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestExecutionController;
+use App\Http\Controllers\AdrController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +33,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('projects.tests', TestController::class);
     Route::post('/projects/{project}/tests/{test}/executions', [TestExecutionController::class, 'store'])
         ->name('projects.tests.executions.store');
+
+    // ADR
+    Route::resource('projects.adrs', AdrController::class);
+
+    // Tasks
+    Route::resource('projects.tasks', TaskController::class);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
