@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMemberController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestExecutionController;
@@ -26,6 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/projects/{project}/members', [ProjectMemberController::class, 'store'])->name('projects.members.store');
     Route::patch('/projects/{project}/members/{user}', [ProjectMemberController::class, 'update'])->name('projects.members.update');
     Route::delete('/projects/{project}/members/{user}', [ProjectMemberController::class, 'destroy'])->name('projects.members.destroy');
+
+    // Modules
+    Route::resource('projects.modules', ModuleController::class);
 
     // Requirements
     Route::resource('projects.requirements', RequirementController::class);
