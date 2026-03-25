@@ -17,6 +17,27 @@
             </div>
         @endif
 
+        {{-- Tabs --}}
+        <div class="flex items-center gap-1 border-b border-slate-700/50" x-data="{ tab: '{{ request('tab', 'list') }}' }">
+            <button @click="tab = 'list'" :class="tab === 'list' ? 'text-white border-b-2 border-blue-500' : 'text-slate-400 hover:text-white'"
+                    class="px-4 py-2 text-sm font-medium transition-colors cursor-pointer">
+                Liste
+            </button>
+            <button @click="tab = 'matrix'" :class="tab === 'matrix' ? 'text-white border-b-2 border-blue-500' : 'text-slate-400 hover:text-white'"
+                    class="px-4 py-2 text-sm font-medium transition-colors cursor-pointer">
+                Matrice de traçabilité
+            </button>
+        </div>
+
+        {{-- List tab --}}
+        <div x-show="tab === 'list'" x-cloak>
+
+        @if(false && session('success'))
+            <div class="px-4 py-3 bg-emerald-500/10 border border-emerald-500/30 rounded-lg text-emerald-400 text-sm">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
             <table class="w-full text-sm text-left">
                 <thead class="text-xs text-slate-400 uppercase bg-slate-800/50">
@@ -71,6 +92,12 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        </div>
+
+        {{-- Matrix tab --}}
+        <div x-show="tab === 'matrix'" x-cloak>
+            <livewire:tests.traceability-matrix :project="$project" />
         </div>
     </div>
 </x-app-layout>
