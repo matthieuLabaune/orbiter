@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Test;
 use App\Models\TestExecution;
-use App\Services\VVStatusService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class TestExecutionController extends Controller
 {
-    public function store(Request $request, Project $project, Test $test, VVStatusService $vvService)
+    public function store(Request $request, Project $project, Test $test)
     {
         Gate::authorize('update', $project);
 
@@ -28,9 +27,7 @@ class TestExecutionController extends Controller
             'notes' => $validated['notes'] ?? null,
         ]);
 
-        foreach ($test->requirements as $requirement) {
-            $vvService->recalculateForRequirement($requirement);
-        }
+        // V&V recalculation handled by TestExecutionObserver
 
         return redirect()->route('projects.tests.show', [$project, $test])
             ->with('success', 'Exécution enregistrée.');
