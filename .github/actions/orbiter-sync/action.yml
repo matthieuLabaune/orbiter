@@ -1,0 +1,81 @@
+name: 'Orbiter Sync'
+description: 'Sync test results and commits to Orbiter'
+inputs:
+  orbiter-url:
+    description: 'Orbiter instance URL'
+    required: true
+  orbiter-token:
+    description: 'Orbiter API token'
+    required: true
+  project-slug:
+    description: 'Orbiter project slug'
+    required: true
+  test-results-file:
+    description: 'Path to JUnit XML test results file'
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - name: Parse and sync test results
+      if: inputs.test-results-file != ''
+      shell: bash
+      run: |
+        if [ ! -f "${{ inputs.test-results-file }}" ]; then
+          echo "Test results file not found: ${{ inputs.test-results-file }}"
+          exit 0
+        fi
+
+        # Parse JUnit XML and extract test results
+        # Map test names to TEST-XXX refs via @covers annotation or naming convention
+        python3 -c "
+        import xml.etree.ElementTree as ET
+        import json, re, sys
+
+        tree = ET.parse('${{ inputs.test-results-file }}')
+        results = []
+
+        for testcase in tree.iter('testcase'):
+            name = testcase.get('name', '')
+            classname = testcase.get('classname', '')
+            time_ms = int(float(testcase.get('time', '0')) * 1000)
+
+            # Extract TEST-XXX from test name or classname
+            match = re.search(r'TEST-\d{3}', name + ' ' + classname)
+            if not match:
+                # Try convention: test_XXX_ prefix
+                num_match = re.search(r'test_(\d{3})', name)
+                if num_match:
+                    match_ref = f'TEST-{num_match.group(1)}'
+                else:
+                    continue
+            else:
+                match_ref = match.group(0)
+
+            failure = testcase.find('failure')
+            error = testcase.find('error')
+            skipped = testcase.find('skipped')
+
+            if failure is not None or error is not None:
+                result = 'fail'
+            elif skipped is not None:
+                result = 'skip'
+            else:
+                result = 'pass'
+
+            results.append({
+                'test_ref': match_ref,
+                'result': result,
+                'duration_ms': time_ms,
+                'commit_sha': '${{ github.sha }}'
+            })
+
+        print(json.dumps({'results': results}))
+        " > /tmp/orbiter-results.json
+
+        echo "Syncing $(cat /tmp/orbiter-results.json | python3 -c 'import json,sys; print(len(json.load(sys.stdin).get("results",[])))') test results to Orbiter..."
+
+        curl -s -X POST \
+          "${{ inputs.orbiter-url }}/api/projects/${{ inputs.project-slug }}/test-results" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ inputs.orbiter-token }}" \
+          -d @/tmp/orbiter-results.json
