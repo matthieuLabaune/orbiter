@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('projects.modules.show', [$project, $module]) }}" class="hover:opacity-80 transition-colors" style="color: var(--orbiter-text-muted);">
+            <a href="{{ route('projects.modules.show', [$project, $module]) }}" class="hover:opacity-80 transition-colors" style="color: var(--o-text-4);">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
-            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Modifier {{ $module->name }}</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--o-text);">Modifier {{ $module->name }}</h2>
         </div>
     </x-slot>
 
@@ -15,7 +15,7 @@
             @method('PUT')
 
             <div>
-                <label for="name" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Nom du module</label>
+                <label for="name" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Nom du module</label>
                 <input type="text" name="name" id="name" value="{{ old('name', $module->name) }}" required
                        class="input-field w-full rounded-lg px-3 py-2 transition-colors">
                 @error('name')
@@ -24,7 +24,7 @@
             </div>
 
             <div>
-                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Description</label>
+                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Description</label>
                 <textarea name="description" id="description" rows="4"
                           class="input-field w-full rounded-lg px-3 py-2 transition-colors">{{ old('description', $module->description) }}</textarea>
                 @error('description')
@@ -33,7 +33,7 @@
             </div>
 
             <div>
-                <label for="status" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Statut</label>
+                <label for="status" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Statut</label>
                 <select name="status" id="status"
                         class="input-field w-full rounded-lg px-3 py-2 transition-colors">
                     <option value="active" {{ old('status', $module->status) === 'active' ? 'selected' : '' }}>Active</option>
@@ -48,10 +48,10 @@
             {{-- Dépendances --}}
             @if($allModules->isNotEmpty())
                 <div>
-                    <label class="block text-sm font-medium mb-2" style="color: var(--orbiter-text-secondary);">Dépendances</label>
-                    <div class="space-y-2 rounded-lg p-3" style="background: var(--orbiter-surface-2); border: 1px solid var(--orbiter-border);">
+                    <label class="block text-sm font-medium mb-2" style="color: var(--o-text-2);">Dépendances</label>
+                    <div class="space-y-2 rounded-lg p-3" style="background: var(--o-surface-2); border: 1px solid var(--o-border);">
                         @foreach($allModules as $otherModule)
-                            <label class="flex items-center gap-2 text-sm cursor-pointer hover:opacity-80 transition-colors" style="color: var(--orbiter-text-secondary);">
+                            <label class="flex items-center gap-2 text-sm cursor-pointer hover:opacity-80 transition-colors" style="color: var(--o-text-2);">
                                 <input type="checkbox" name="dependencies[]" value="{{ $otherModule->id }}"
                                        {{ in_array($otherModule->id, old('dependencies', $module->dependencies->pluck('id')->toArray())) ? 'checked' : '' }}
                                        class="rounded bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-0">
@@ -66,7 +66,7 @@
             @endif
 
             <div class="flex items-center justify-end gap-3">
-                <a href="{{ route('projects.modules.show', [$project, $module]) }}" class="px-4 py-2 text-sm hover:opacity-80 transition-colors" style="color: var(--orbiter-text-secondary);">
+                <a href="{{ route('projects.modules.show', [$project, $module]) }}" class="px-4 py-2 text-sm hover:opacity-80 transition-colors" style="color: var(--o-text-2);">
                     Annuler
                 </a>
                 <button type="submit"
@@ -78,7 +78,7 @@
 
         <div class="mt-8 bg-red-500/5 border border-red-500/20 rounded-xl p-6">
             <h3 class="text-sm font-medium text-red-400 mb-2">Zone dangereuse</h3>
-            <p class="text-sm mb-4" style="color: var(--orbiter-text-muted);">Supprimer ce module et toutes ses données de manière irréversible.</p>
+            <p class="text-sm mb-4" style="color: var(--o-text-4);">Supprimer ce module et toutes ses données de manière irréversible.</p>
             <form action="{{ route('projects.modules.destroy', [$project, $module]) }}" method="POST"
                   onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce module ? Cette action est irréversible.')">
                 @csrf

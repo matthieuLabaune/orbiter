@@ -4,7 +4,7 @@
             <a href="{{ route('projects.requirements.index', $project) }}" class="text-slate-400 hover:text-white transition-colors">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
-            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Nouvelle exigence</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--o-text);">Nouvelle exigence</h2>
         </div>
     </x-slot>
 
@@ -15,7 +15,7 @@
 
             <div class="grid grid-cols-2 gap-4">
                 <div class="col-span-2">
-                    <label for="title" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Titre</label>
+                    <label for="title" class="block text-sm font-medium mb-1" style="color: var(--o-text-4);">Titre</label>
                     <input type="text" name="title" id="title" value="{{ old('title') }}" required autofocus
                            class="w-full input-field"
                            placeholder="L'utilisateur peut...">
@@ -23,7 +23,7 @@
                 </div>
 
                 <div>
-                    <label for="module_id" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Module</label>
+                    <label for="module_id" class="block text-sm font-medium mb-1" style="color: var(--o-text-4);">Module</label>
                     <select name="module_id" id="module_id" required
                             class="w-full input-field">
                         <option value="">Sélectionner...</option>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div>
-                    <label for="priority" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Priorité</label>
+                    <label for="priority" class="block text-sm font-medium mb-1" style="color: var(--o-text-4);">Priorité</label>
                     <select name="priority" id="priority" required
                             class="w-full input-field">
                         @foreach(['P0' => 'P0 — Critique', 'P1' => 'P1 — Important', 'P2' => 'P2 — Normal', 'P3' => 'P3 — Nice to have'] as $val => $label)
@@ -48,25 +48,25 @@
             </div>
 
             <div>
-                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Description</label>
+                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--o-text-4);">Description</label>
                 <textarea name="description" id="description" rows="4"
                           class="w-full input-field"
                           placeholder="Description détaillée de l'exigence...">{{ old('description') }}</textarea>
             </div>
 
             <div>
-                <label for="acceptance_criteria" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-muted);">Critères d'acceptation</label>
+                <label for="acceptance_criteria" class="block text-sm font-medium mb-1" style="color: var(--o-text-4);">Critères d'acceptation</label>
                 <textarea name="acceptance_criteria" id="acceptance_criteria" rows="4"
                           class="w-full input-field font-mono text-sm"
                           placeholder="- [ ] Critère 1&#10;- [ ] Critère 2">{{ old('acceptance_criteria') }}</textarea>
             </div>
 
             {{-- Risk Score FMEA --}}
-            <div class="rounded-lg p-4" style="border: 1px solid var(--orbiter-border);">
-                <h3 class="text-sm font-medium mb-3" style="color: var(--orbiter-text-secondary);">Score de risque (FMEA)</h3>
+            <div class="rounded-lg p-4" style="border: 1px solid var(--o-border);">
+                <h3 class="text-sm font-medium mb-3" style="color: var(--o-text-2);">Score de risque (FMEA)</h3>
                 <div class="grid grid-cols-3 gap-4">
                     <div>
-                        <label for="risk_impact" class="block text-xs mb-1" style="color: var(--orbiter-text-muted);">Impact (1-5)</label>
+                        <label for="risk_impact" class="block text-xs mb-1" style="color: var(--o-text-4);">Impact (1-5)</label>
                         <select name="risk_impact" id="risk_impact"
                                 class="w-full input-field text-sm">
                             <option value="">—</option>
@@ -76,7 +76,7 @@
                         </select>
                     </div>
                     <div>
-                        <label for="risk_probability" class="block text-xs mb-1" style="color: var(--orbiter-text-muted);">Probabilité (1-5)</label>
+                        <label for="risk_probability" class="block text-xs mb-1" style="color: var(--o-text-4);">Probabilité (1-5)</label>
                         <select name="risk_probability" id="risk_probability"
                                 class="w-full input-field text-sm">
                             <option value="">—</option>
@@ -86,7 +86,7 @@
                         </select>
                     </div>
                     <div>
-                        <label for="risk_detectability" class="block text-xs mb-1" style="color: var(--orbiter-text-muted);">Détectabilité (1-5)</label>
+                        <label for="risk_detectability" class="block text-xs mb-1" style="color: var(--o-text-4);">Détectabilité (1-5)</label>
                         <select name="risk_detectability" id="risk_detectability"
                                 class="w-full input-field text-sm">
                             <option value="">—</option>
@@ -96,11 +96,11 @@
                         </select>
                     </div>
                 </div>
-                <p class="mt-2 text-xs" style="color: var(--orbiter-text-muted);">Score = Impact × Probabilité × (6 - Détectabilité)</p>
+                <p class="mt-2 text-xs" style="color: var(--o-text-4);">Score = Impact × Probabilité × (6 - Détectabilité)</p>
             </div>
 
             <div class="flex items-center justify-end gap-3">
-                <a href="{{ route('projects.requirements.index', $project) }}" class="px-4 py-2 text-sm text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-colors">Annuler</a>
+                <a href="{{ route('projects.requirements.index', $project) }}" class="px-4 py-2 text-sm transition-colors" style="color: var(--o-text-4);">Annuler</a>
                 <button type="submit" class="px-4 py-2 btn-primary transition-colors">
                     Créer l'exigence
                 </button>

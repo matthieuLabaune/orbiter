@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('projects.baselines.index', $project) }}" class="transition-colors" style="color: var(--orbiter-text-muted);">
+            <a href="{{ route('projects.baselines.index', $project) }}" class="transition-colors" style="color: var(--o-text-4);">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
-            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Nouvelle baseline</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--o-text);">Nouvelle baseline</h2>
         </div>
     </x-slot>
 
@@ -14,7 +14,7 @@
             @csrf
 
             <div>
-                <label for="ref" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Reference (version)</label>
+                <label for="ref" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Reference (version)</label>
                 <input type="text" name="ref" id="ref" value="{{ old('ref') }}" required autofocus
                        class="input-field"
                        placeholder="v0.1.0">
@@ -22,7 +22,7 @@
             </div>
 
             <div>
-                <label for="title" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Titre</label>
+                <label for="title" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Titre</label>
                 <input type="text" name="title" id="title" value="{{ old('title') }}" required
                        class="input-field"
                        placeholder="Baseline MVP, Release candidate...">
@@ -30,28 +30,28 @@
             </div>
 
             <div>
-                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Description</label>
+                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Description</label>
                 <textarea name="description" id="description" rows="4"
                           class="input-field"
                           placeholder="Notes sur cette baseline...">{{ old('description') }}</textarea>
             </div>
 
             <div>
-                <label for="signed_by" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Signe par</label>
+                <label for="signed_by" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Signe par</label>
                 <input type="text" name="signed_by" id="signed_by" value="{{ old('signed_by') }}"
                        class="input-field"
                        placeholder="Nom du responsable">
             </div>
 
             <div class="px-4 py-3 bg-blue-500/5 border border-blue-500/20 rounded-lg">
-                <div class="flex items-center gap-2 text-sm" style="color: var(--orbiter-accent);">
+                <div class="flex items-center gap-2 text-sm" style="color: var(--o-accent);">
                     <x-lucide-info class="w-4 h-4 flex-shrink-0" />
                     <span>Un snapshot complet de l'etat du projet sera automatiquement capture au moment de la creation.</span>
                 </div>
             </div>
 
             <div class="flex items-center justify-end gap-3">
-                <a href="{{ route('projects.baselines.index', $project) }}" class="px-4 py-2 text-sm transition-colors" style="color: var(--orbiter-text-muted);">Annuler</a>
+                <a href="{{ route('projects.baselines.index', $project) }}" class="px-4 py-2 text-sm transition-colors" style="color: var(--o-text-4);">Annuler</a>
                 <button type="submit" class="btn-primary">
                     Creer la baseline
                 </button>

@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('projects.diagrams.show', [$project, $diagram]) }}" class="transition-colors" style="color: var(--orbiter-text-muted);">
+            <a href="{{ route('projects.diagrams.show', [$project, $diagram]) }}" class="transition-colors" style="color: var(--o-text-4);">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
-            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Modifier {{ $diagram->title }}</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--o-text);">Modifier {{ $diagram->title }}</h2>
         </div>
     </x-slot>
 

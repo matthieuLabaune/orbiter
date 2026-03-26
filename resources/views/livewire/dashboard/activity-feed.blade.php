@@ -1,8 +1,8 @@
 <div class="surface p-5">
-    <h3 class="text-sm font-medium uppercase tracking-wider mb-4" style="color: var(--orbiter-text-muted);">Activité récente</h3>
+    <h3 class="text-sm font-medium uppercase tracking-wider mb-4" style="color: var(--o-text-4);">Activité récente</h3>
 
     @if($activities->isEmpty())
-        <p class="text-sm text-center py-6" style="color: var(--orbiter-text-muted);">Aucune activité récente.</p>
+        <p class="text-sm text-center py-6" style="color: var(--o-text-4);">Aucune activité récente.</p>
     @else
         <div class="space-y-3 max-h-96 overflow-y-auto">
             @foreach($activities as $activity)
@@ -22,14 +22,14 @@
                     </div>
                     <div class="min-w-0 flex-1">
                         <div class="flex items-center justify-between gap-2">
-                            <span class="text-sm font-mono" style="color: var(--orbiter-text);">{{ $activity['message'] }}</span>
-                            <span class="text-[10px] shrink-0" style="color: var(--orbiter-text-muted);">{{ $activity['date']?->diffForHumans() }}</span>
+                            <span class="text-sm font-mono" style="color: var(--o-text);">{{ $activity['message'] }}</span>
+                            <span class="text-[10px] shrink-0" style="color: var(--o-text-4);">{{ $activity['date']?->diffForHumans() }}</span>
                         </div>
                         @if($activity['detail'])
-                            <div class="text-xs truncate" style="color: var(--orbiter-text-muted);">{{ $activity['detail'] }}</div>
+                            <div class="text-xs truncate" style="color: var(--o-text-4);">{{ $activity['detail'] }}</div>
                         @endif
                         @if($activity['user'])
-                            <div class="text-[10px]" style="color: var(--orbiter-text-muted);">{{ $activity['user'] }}</div>
+                            <div class="text-[10px]" style="color: var(--o-text-4);">{{ $activity['user'] }}</div>
                         @endif
                     </div>
                 </div>

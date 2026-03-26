@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="{{ route('projects.show', $project) }}" class="hover:opacity-80 transition-colors" style="color: var(--orbiter-text-muted);">
+                <a href="{{ route('projects.show', $project) }}" class="hover:opacity-80 transition-colors" style="color: var(--o-text-4);">
                     <x-lucide-arrow-left class="w-5 h-5" />
                 </a>
-                <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Modules</h2>
+                <h2 class="text-xl font-semibold" style="color: var(--o-text);">Modules</h2>
             </div>
             @can('update', $project)
                 <a href="{{ route('projects.modules.create', $project) }}"
@@ -26,9 +26,9 @@
 
         @if($modules->isEmpty())
             <div class="text-center py-16">
-                <x-lucide-boxes class="w-12 h-12 mx-auto mb-4" style="color: var(--orbiter-text-muted);" />
-                <h3 class="text-lg font-medium mb-2" style="color: var(--orbiter-text-secondary);">Aucun module</h3>
-                <p class="mb-6" style="color: var(--orbiter-text-muted);">Créez votre premier module pour commencer.</p>
+                <x-lucide-boxes class="w-12 h-12 mx-auto mb-4" style="color: var(--o-text-4);" />
+                <h3 class="text-lg font-medium mb-2" style="color: var(--o-text-2);">Aucun module</h3>
+                <p class="mb-6" style="color: var(--o-text-4);">Créez votre premier module pour commencer.</p>
                 @can('update', $project)
                     <a href="{{ route('projects.modules.create', $project) }}"
                        class="btn-primary inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors">
@@ -43,7 +43,7 @@
                     <a href="{{ route('projects.modules.show', [$project, $module]) }}"
                        class="block surface p-5 hover:border-blue-500/50 transition-all group">
                         <div class="flex items-start justify-between mb-2">
-                            <h3 class="font-semibold group-hover:text-blue-400 transition-colors" style="color: var(--orbiter-text);">
+                            <h3 class="font-semibold group-hover:text-blue-400 transition-colors" style="color: var(--o-text);">
                                 {{ $module->name }}
                             </h3>
                             <x-ui.badge :color="match($module->status) { 'active' => 'emerald', 'deprecated' => 'amber', default => 'slate' }">
@@ -51,13 +51,13 @@
                             </x-ui.badge>
                         </div>
 
-                        <p class="text-xs mb-2" style="color: var(--orbiter-text-muted);">{{ $module->owner->name ?? 'N/A' }}</p>
+                        <p class="text-xs mb-2" style="color: var(--o-text-4);">{{ $module->owner->name ?? 'N/A' }}</p>
 
                         @if($module->description)
-                            <p class="text-sm mb-4 line-clamp-2" style="color: var(--orbiter-text-secondary);">{{ $module->description }}</p>
+                            <p class="text-sm mb-4 line-clamp-2" style="color: var(--o-text-2);">{{ $module->description }}</p>
                         @endif
 
-                        <div class="flex items-center gap-4 text-xs" style="color: var(--orbiter-text-muted);">
+                        <div class="flex items-center gap-4 text-xs" style="color: var(--o-text-4);">
                             <span class="flex items-center gap-1">
                                 <x-lucide-list-checks class="w-3.5 h-3.5" />
                                 {{ $module->requirements_count }} REQ

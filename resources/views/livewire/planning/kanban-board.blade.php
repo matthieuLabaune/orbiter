@@ -22,9 +22,9 @@
                 <div class="flex items-center justify-between mb-3 px-1">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full {{ $dotColors[$config['color']] ?? 'bg-slate-500' }}"></span>
-                        <span class="text-sm font-medium" style="color: var(--orbiter-text-secondary);">{{ $config['label'] }}</span>
+                        <span class="text-sm font-medium" style="color: var(--o-text-2);">{{ $config['label'] }}</span>
                     </div>
-                    <span class="text-xs font-mono" style="color: var(--orbiter-text-muted);">{{ $columnTasks->count() }}</span>
+                    <span class="text-xs font-mono" style="color: var(--o-text-4);">{{ $columnTasks->count() }}</span>
                 </div>
 
                 {{-- Cards --}}
@@ -32,18 +32,18 @@
                     @foreach($columnTasks as $task)
                         <div class="surface-elevated p-3 transition-colors">
                             <a href="{{ route('projects.tasks.show', [$project, $task]) }}"
-                               class="text-sm font-medium leading-snug block mb-2" style="color: var(--orbiter-text);">
+                               class="text-sm font-medium leading-snug block mb-2" style="color: var(--o-text);">
                                 {{ $task->title }}
                             </a>
 
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2">
                                     @if($task->module)
-                                        <span class="text-[10px] px-1.5 py-0.5 rounded" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">{{ $task->module->name }}</span>
+                                        <span class="text-[10px] px-1.5 py-0.5 rounded" style="background: var(--o-surface-2); color: var(--o-text-4);">{{ $task->module->name }}</span>
                                     @endif
                                 </div>
                                 @if($task->assignee)
-                                    <div class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-secondary);"
+                                    <div class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium" style="background: var(--o-surface-2); color: var(--o-text-2);"
                                          title="{{ $task->assignee->name }}">
                                         {{ substr($task->assignee->name, 0, 1) }}
                                     </div>

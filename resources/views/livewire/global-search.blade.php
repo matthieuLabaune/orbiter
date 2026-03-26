@@ -7,10 +7,10 @@
     {{-- Trigger button --}}
     <button @click="showSearch = true; $nextTick(() => $refs.searchInput?.focus())"
             class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg transition-all cursor-pointer"
-            style="color: var(--orbiter-text-muted); background: var(--orbiter-surface-2); border: 1px solid var(--orbiter-border);"
+            style="color: var(--o-text-4); background: var(--o-surface-2); border: 1px solid var(--o-border);"
         <x-lucide-search class="w-4 h-4" />
         <span class="hidden sm:inline">Rechercher...</span>
-        <kbd class="hidden sm:inline text-[10px] px-1.5 py-0.5 rounded" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted); border: 1px solid var(--orbiter-border);">
+        <kbd class="hidden sm:inline text-[10px] px-1.5 py-0.5 rounded" style="background: var(--o-surface-2); color: var(--o-text-4); border: 1px solid var(--o-border);">
             ⌘K
         </kbd>
     </button>

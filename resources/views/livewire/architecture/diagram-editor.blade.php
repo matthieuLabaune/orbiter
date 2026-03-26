@@ -9,8 +9,8 @@
         {{-- Editor --}}
         <div class="surface p-4">
             <div class="flex items-center justify-between mb-3">
-                <h3 class="text-sm font-medium" style="color: var(--orbiter-text-muted);">Source Mermaid</h3>
-                <span class="text-xs font-mono" style="color: var(--orbiter-text-muted);">v{{ $diagram->version }}</span>
+                <h3 class="text-sm font-medium" style="color: var(--o-text-4);">Source Mermaid</h3>
+                <span class="text-xs font-mono" style="color: var(--o-text-4);">v{{ $diagram->version }}</span>
             </div>
             <input type="text" wire:model="title"
                    class="input-field mb-3"
@@ -19,7 +19,7 @@
                       class="input-field font-mono resize-none"
                       spellcheck="false"></textarea>
             <div class="flex items-center justify-between mt-3">
-                <a href="https://mermaid.js.org/intro/" target="_blank" rel="noopener" class="text-xs" style="color: var(--orbiter-accent);">
+                <a href="https://mermaid.js.org/intro/" target="_blank" rel="noopener" class="text-xs" style="color: var(--o-accent);">
                     Documentation Mermaid
                 </a>
                 <button wire:click="save"
@@ -31,8 +31,8 @@
 
         {{-- Preview --}}
         <div class="surface p-4">
-            <h3 class="text-sm font-medium mb-3" style="color: var(--orbiter-text-muted);">Prévisualisation</h3>
-            <div class="rounded-lg p-4 min-h-[400px] overflow-auto" style="background: var(--orbiter-surface-2);" wire:ignore>
+            <h3 class="text-sm font-medium mb-3" style="color: var(--o-text-4);">Prévisualisation</h3>
+            <div class="rounded-lg p-4 min-h-[400px] overflow-auto" style="background: var(--o-surface-2);" wire:ignore>
                 <pre class="mermaid" id="mermaid-preview">{{ $mermaidSource }}</pre>
             </div>
         </div>

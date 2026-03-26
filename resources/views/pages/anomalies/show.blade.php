@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('projects.anomalies.index', $project) }}" class="transition-colors" style="color: var(--orbiter-text-muted);">
+            <a href="{{ route('projects.anomalies.index', $project) }}" class="transition-colors" style="color: var(--o-text-4);">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
             <div>
@@ -14,12 +14,12 @@
                     $statusLabels = ['open' => 'Ouvert', 'investigating' => 'Investigation', 'resolved' => 'Resolu', 'closed' => 'Ferme'];
                 @endphp
                 <div class="flex items-center gap-2">
-                    <span class="font-mono" style="color: var(--orbiter-accent);">{{ $anomaly->ref }}</span>
+                    <span class="font-mono" style="color: var(--o-accent);">{{ $anomaly->ref }}</span>
                     <x-ui.badge :color="$typeColors[$anomaly->type] ?? 'slate'">{{ $typeLabels[$anomaly->type] ?? $anomaly->type }}</x-ui.badge>
                     <x-ui.badge :color="$severityColors[$anomaly->severity] ?? 'slate'">{{ $severityLabels[$anomaly->severity] ?? $anomaly->severity }}</x-ui.badge>
                     <x-ui.badge :color="$statusColors[$anomaly->status] ?? 'slate'">{{ $statusLabels[$anomaly->status] ?? $anomaly->status }}</x-ui.badge>
                 </div>
-                <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">{{ $anomaly->title }}</h2>
+                <h2 class="text-xl font-semibold" style="color: var(--o-text);">{{ $anomaly->title }}</h2>
             </div>
         </div>
     </x-slot>
@@ -42,18 +42,18 @@
         @endif
 
         {{-- Meta --}}
-        <div class="text-xs flex items-center gap-3" style="color: var(--orbiter-text-muted);">
+        <div class="text-xs flex items-center gap-3" style="color: var(--o-text-4);">
             <span>Cree le {{ $anomaly->created_at->format('d/m/Y') }}</span>
             @if($anomaly->resolved_at)
-                <span style="color: var(--orbiter-border);">·</span>
+                <span style="color: var(--o-border);">·</span>
                 <span>Resolu le {{ $anomaly->resolved_at->format('d/m/Y') }}</span>
             @endif
             @if($anomaly->module)
-                <span style="color: var(--orbiter-border);">·</span>
-                <span class="px-1.5 py-0.5 rounded" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">{{ $anomaly->module->name }}</span>
+                <span style="color: var(--o-border);">·</span>
+                <span class="px-1.5 py-0.5 rounded" style="background: var(--o-surface-2); color: var(--o-text-4);">{{ $anomaly->module->name }}</span>
             @endif
             @if($anomaly->assignee)
-                <span style="color: var(--orbiter-border);">·</span>
+                <span style="color: var(--o-border);">·</span>
                 <span>Assigne a {{ $anomaly->assignee->name }}</span>
             @endif
         </div>
@@ -61,19 +61,19 @@
         {{-- Description --}}
         @if($anomaly->description)
             <div class="surface p-5">
-                <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">Description</h3>
-                <div class="whitespace-pre-wrap" style="color: var(--orbiter-text-secondary);">{{ $anomaly->description }}</div>
+                <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--o-text-4);">Description</h3>
+                <div class="whitespace-pre-wrap" style="color: var(--o-text-2);">{{ $anomaly->description }}</div>
             </div>
         @endif
 
         {{-- Linked requirement --}}
         @if($anomaly->requirement)
             <div class="surface p-5">
-                <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">Exigence liee</h3>
+                <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--o-text-4);">Exigence liee</h3>
                 <a href="{{ route('projects.requirements.show', [$project, $anomaly->requirement]) }}"
-                   class="inline-flex items-center gap-2 transition-colors" style="color: var(--orbiter-accent);">
+                   class="inline-flex items-center gap-2 transition-colors" style="color: var(--o-accent);">
                     <span class="font-mono text-sm">{{ $anomaly->requirement->ref }}</span>
-                    <span style="color: var(--orbiter-text-secondary);">{{ $anomaly->requirement->title }}</span>
+                    <span style="color: var(--o-text-2);">{{ $anomaly->requirement->title }}</span>
                     <x-lucide-external-link class="w-3.5 h-3.5" />
                 </a>
             </div>
@@ -82,11 +82,11 @@
         {{-- Linked lesson --}}
         @if($anomaly->lesson)
             <div class="surface p-5">
-                <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">Lesson learned</h3>
+                <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--o-text-4);">Lesson learned</h3>
                 <a href="{{ route('projects.lessons.show', [$project, $anomaly->lesson]) }}"
-                   class="inline-flex items-center gap-2 transition-colors" style="color: var(--orbiter-accent);">
+                   class="inline-flex items-center gap-2 transition-colors" style="color: var(--o-accent);">
                     <span class="font-mono text-sm">{{ $anomaly->lesson->ref }}</span>
-                    <span style="color: var(--orbiter-text-secondary);">{{ $anomaly->lesson->title }}</span>
+                    <span style="color: var(--o-text-2);">{{ $anomaly->lesson->title }}</span>
                     <x-lucide-external-link class="w-3.5 h-3.5" />
                 </a>
             </div>

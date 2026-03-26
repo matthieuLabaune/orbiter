@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('projects.lessons.index', $project) }}" class="transition-colors" style="color: var(--orbiter-text-muted);">
+            <a href="{{ route('projects.lessons.index', $project) }}" class="transition-colors" style="color: var(--o-text-4);">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
-            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Nouvelle lesson learned</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--o-text);">Nouvelle lesson learned</h2>
         </div>
     </x-slot>
 
@@ -14,7 +14,7 @@
             @csrf
 
             <div>
-                <label for="title" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Titre</label>
+                <label for="title" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Titre</label>
                 <input type="text" name="title" id="title" value="{{ old('title') }}" required autofocus
                        class="input-field"
                        placeholder="Apprentissage clé...">
@@ -22,7 +22,7 @@
             </div>
 
             <div>
-                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Description</label>
+                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Description</label>
                 <textarea name="description" id="description" rows="5"
                           class="input-field"
                           placeholder="Contexte, impact, recommandation...">{{ old('description') }}</textarea>
@@ -31,7 +31,7 @@
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label for="module_id" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Module</label>
+                    <label for="module_id" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Module</label>
                     <select name="module_id" id="module_id"
                             class="input-field">
                         <option value="">—</option>
@@ -41,7 +41,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="requirement_id" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Exigence liée</label>
+                    <label for="requirement_id" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Exigence liée</label>
                     <select name="requirement_id" id="requirement_id"
                             class="input-field">
                         <option value="">—</option>
@@ -53,7 +53,7 @@
             </div>
 
             <div>
-                <label for="tags" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Tags</label>
+                <label for="tags" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Tags</label>
                 <input type="text" name="tags" id="tags" value="{{ old('tags') }}"
                        class="input-field"
                        placeholder="process, testing, design (comma-separated)">
@@ -61,7 +61,7 @@
             </div>
 
             <div class="flex items-center justify-end gap-3">
-                <a href="{{ route('projects.lessons.index', $project) }}" class="px-4 py-2 text-sm transition-colors" style="color: var(--orbiter-text-muted);">Annuler</a>
+                <a href="{{ route('projects.lessons.index', $project) }}" class="px-4 py-2 text-sm transition-colors" style="color: var(--o-text-4);">Annuler</a>
                 <button type="submit" class="btn-primary">
                     Enregistrer
                 </button>

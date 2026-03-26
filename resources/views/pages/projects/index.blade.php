@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Projets</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--o-text);">Projets</h2>
             <a href="{{ route('projects.create') }}"
                class="btn-primary inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors">
                 <x-lucide-plus class="w-4 h-4" />
@@ -19,9 +19,9 @@
 
         @if($projects->isEmpty())
             <div class="text-center py-16">
-                <x-lucide-rocket class="w-12 h-12 mx-auto mb-4" style="color: var(--orbiter-text-muted);" />
-                <h3 class="text-lg font-medium mb-2" style="color: var(--orbiter-text-secondary);">Aucun projet</h3>
-                <p class="mb-6" style="color: var(--orbiter-text-muted);">Créez votre premier projet pour commencer.</p>
+                <x-lucide-rocket class="w-12 h-12 mx-auto mb-4" style="color: var(--o-text-4);" />
+                <h3 class="text-lg font-medium mb-2" style="color: var(--o-text-2);">Aucun projet</h3>
+                <p class="mb-6" style="color: var(--o-text-4);">Créez votre premier projet pour commencer.</p>
                 <a href="{{ route('projects.create') }}"
                    class="btn-primary inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors">
                     <x-lucide-plus class="w-4 h-4" />
@@ -34,17 +34,17 @@
                     <a href="{{ route('projects.show', $project) }}"
                        class="block surface p-5 hover:border-blue-500/50 transition-all group">
                         <div class="flex items-start justify-between mb-3">
-                            <h3 class="font-semibold group-hover:text-blue-400 transition-colors" style="color: var(--orbiter-text);">
+                            <h3 class="font-semibold group-hover:text-blue-400 transition-colors" style="color: var(--o-text);">
                                 {{ $project->name }}
                             </h3>
-                            <span class="text-xs font-mono" style="color: var(--orbiter-text-muted);">{{ $project->slug }}</span>
+                            <span class="text-xs font-mono" style="color: var(--o-text-4);">{{ $project->slug }}</span>
                         </div>
 
                         @if($project->description)
-                            <p class="text-sm mb-4 line-clamp-2" style="color: var(--orbiter-text-secondary);">{{ $project->description }}</p>
+                            <p class="text-sm mb-4 line-clamp-2" style="color: var(--o-text-2);">{{ $project->description }}</p>
                         @endif
 
-                        <div class="flex items-center gap-4 text-xs" style="color: var(--orbiter-text-muted);">
+                        <div class="flex items-center gap-4 text-xs" style="color: var(--o-text-4);">
                             <span class="flex items-center gap-1">
                                 <x-lucide-boxes class="w-3.5 h-3.5" />
                                 {{ $project->modules_count }} modules

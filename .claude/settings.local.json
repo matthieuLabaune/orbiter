@@ -24,7 +24,12 @@
       "Bash(git merge:*)",
       "Bash(git branch:*)",
       "Bash(git stash:*)",
-      "Bash(git cherry-pick:*)"
+      "Bash(git cherry-pick:*)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_fill_form",
+      "Bash(curl -s -w \"%{http_code}\" -o /dev/null http://localhost:8080)"
     ]
   }
 }

@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <a href="{{ route('projects.anomalies.index', $project) }}" class="transition-colors" style="color: var(--orbiter-text-muted);">
+            <a href="{{ route('projects.anomalies.index', $project) }}" class="transition-colors" style="color: var(--o-text-4);">
                 <x-lucide-arrow-left class="w-5 h-5" />
             </a>
-            <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">Signaler une anomalie</h2>
+            <h2 class="text-xl font-semibold" style="color: var(--o-text);">Signaler une anomalie</h2>
         </div>
     </x-slot>
 
@@ -14,7 +14,7 @@
             @csrf
 
             <div>
-                <label for="title" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Titre</label>
+                <label for="title" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Titre</label>
                 <input type="text" name="title" id="title" value="{{ old('title') }}" required autofocus
                        class="input-field"
                        placeholder="Description courte de l'anomalie...">
@@ -23,7 +23,7 @@
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label for="type" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Type</label>
+                    <label for="type" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Type</label>
                     <select name="type" id="type" required
                             class="input-field">
                         @foreach(['anomaly' => 'Anomalie', 'non_conformity' => 'Non-conformite', 'defect' => 'Defaut'] as $val => $label)
@@ -32,7 +32,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="severity" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Severite</label>
+                    <label for="severity" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Severite</label>
                     <select name="severity" id="severity" required
                             class="input-field">
                         @foreach(['low' => 'Faible', 'medium' => 'Moyen', 'high' => 'Eleve', 'critical' => 'Critique'] as $val => $label)
@@ -43,7 +43,7 @@
             </div>
 
             <div>
-                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Description</label>
+                <label for="description" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Description</label>
                 <textarea name="description" id="description" rows="5"
                           class="input-field"
                           placeholder="Contexte, etapes de reproduction, impact observe...">{{ old('description') }}</textarea>
@@ -52,7 +52,7 @@
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label for="module_id" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Module</label>
+                    <label for="module_id" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Module</label>
                     <select name="module_id" id="module_id"
                             class="input-field">
                         <option value="">—</option>
@@ -62,7 +62,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="requirement_id" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Exigence liee <span class="text-xs" style="color: var(--orbiter-text-muted);">(requis si NC)</span></label>
+                    <label for="requirement_id" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Exigence liee <span class="text-xs" style="color: var(--o-text-4);">(requis si NC)</span></label>
                     <select name="requirement_id" id="requirement_id"
                             class="input-field">
                         <option value="">—</option>
@@ -75,7 +75,7 @@
             </div>
 
             <div>
-                <label for="assignee_id" class="block text-sm font-medium mb-1" style="color: var(--orbiter-text-secondary);">Assigne a</label>
+                <label for="assignee_id" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Assigne a</label>
                 <select name="assignee_id" id="assignee_id"
                         class="input-field">
                     <option value="">—</option>
@@ -86,7 +86,7 @@
             </div>
 
             <div class="flex items-center justify-end gap-3">
-                <a href="{{ route('projects.anomalies.index', $project) }}" class="px-4 py-2 text-sm transition-colors" style="color: var(--orbiter-text-muted);">Annuler</a>
+                <a href="{{ route('projects.anomalies.index', $project) }}" class="px-4 py-2 text-sm transition-colors" style="color: var(--o-text-4);">Annuler</a>
                 <button type="submit" class="btn-primary">
                     Signaler l'anomalie
                 </button>

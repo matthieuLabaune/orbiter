@@ -7,14 +7,14 @@
                 </a>
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="font-mono" style="color: var(--orbiter-accent);">{{ $adr->ref }}</span>
+                        <span class="font-mono" style="color: var(--o-accent);">{{ $adr->ref }}</span>
                         @php
                             $statusColors = ['proposed' => 'amber', 'accepted' => 'emerald', 'deprecated' => 'slate', 'superseded' => 'red'];
                             $statusLabels = ['proposed' => 'Proposé', 'accepted' => 'Accepté', 'deprecated' => 'Déprécié', 'superseded' => 'Remplacé'];
                         @endphp
                         <x-ui.badge :color="$statusColors[$adr->status] ?? 'slate'">{{ $statusLabels[$adr->status] ?? $adr->status }}</x-ui.badge>
                     </div>
-                    <h2 class="text-xl font-semibold" style="color: var(--orbiter-text);">{{ $adr->title }}</h2>
+                    <h2 class="text-xl font-semibold" style="color: var(--o-text);">{{ $adr->title }}</h2>
                 </div>
             </div>
             @can('update', $project)
@@ -34,13 +34,13 @@
             </div>
         @endif
 
-        <div class="text-xs flex items-center gap-3" style="color: var(--orbiter-text-muted);">
+        <div class="text-xs flex items-center gap-3" style="color: var(--o-text-4);">
             <span>{{ $adr->created_at->format('d/m/Y') }}</span>
             <span>Par {{ $adr->author?->name ?? '—' }}</span>
             @if($adr->modules->isNotEmpty())
                 <span>·</span>
                 @foreach($adr->modules as $mod)
-                    <span class="px-1.5 py-0.5 rounded" style="background: var(--orbiter-surface-2); color: var(--orbiter-text-muted);">{{ $mod->name }}</span>
+                    <span class="px-1.5 py-0.5 rounded" style="background: var(--o-surface-2); color: var(--o-text-4);">{{ $mod->name }}</span>
                 @endforeach
             @endif
         </div>
@@ -48,8 +48,8 @@
         @foreach([['Contexte', $adr->context], ['Décision', $adr->decision], ['Conséquences', $adr->consequences]] as [$title, $content])
             @if($content)
                 <div class="surface p-5">
-                    <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--orbiter-text-muted);">{{ $title }}</h3>
-                    <div class="whitespace-pre-wrap" style="color: var(--orbiter-text-secondary);">{{ $content }}</div>
+                    <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--o-text-4);">{{ $title }}</h3>
+                    <div class="whitespace-pre-wrap" style="color: var(--o-text-2);">{{ $content }}</div>
                 </div>
             @endif
         @endforeach
