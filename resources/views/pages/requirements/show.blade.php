@@ -153,14 +153,20 @@
 
                 {{-- Tasks --}}
                 <div class="surface p-5">
-                    <h3 class="text-sm font-medium uppercase tracking-wider mb-3" style="color: var(--o-text-4);">Tâches ({{ $requirement->tasks->count() }})</h3>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-medium uppercase tracking-wider" style="color: var(--o-text-4);">Tâches ({{ $requirement->tasks->count() }})</h3>
+                        @can('update', $project)
+                            <a href="{{ route('projects.tasks.create', $project) }}?requirement_id={{ $requirement->id }}&module_id={{ $requirement->module_id }}"
+                               class="text-xs font-medium" style="color: var(--o-accent);">
+                                + Tâche
+                            </a>
+                        @endcan
+                    </div>
                     @forelse($requirement->tasks as $task)
                         <div class="flex items-center justify-between py-1.5 text-sm">
-                            <span class="truncate" style="color: var(--o-text-2);">{{ $task->title }}</span>
-                            @php
-                                $statusColors = ['done' => 'emerald', 'in_progress' => 'blue', 'todo' => 'slate', 'blocked' => 'red'];
-                            @endphp
-                            <x-ui.badge :color="$statusColors[$task->status] ?? 'slate'">{{ $task->status }}</x-ui.badge>
+                            <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="truncate hover:opacity-70" style="color: var(--o-text-2);">{{ $task->title }}</a>
+                            @php $statusColors = ['done' => 'green', 'in_progress' => 'blue', 'todo' => 'gray', 'blocked' => 'red']; @endphp
+                            <x-ui.badge :color="$statusColors[$task->status] ?? 'gray'">{{ $task->status }}</x-ui.badge>
                         </div>
                     @empty
                         <p class="text-xs" style="color: var(--o-text-4);">Aucune tâche liée.</p>

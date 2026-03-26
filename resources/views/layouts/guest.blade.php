@@ -1,29 +1,38 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }"
+      :class="{ 'dark': darkMode }">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
         <title>{{ config('app.name', 'Orbiter') }}</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&family=jetbrains-mono:400,500,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=geist:400,500,600,700&family=instrument-serif:400&family=jetbrains-mono:400,500&display=swap" rel="stylesheet" />
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <style>
+            body { font-family: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+        </style>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-[#0a0f1e]">
-            <div>
+    <body class="antialiased" style="background: var(--o-bg);">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+            <div class="mb-6">
                 <a href="/" class="flex items-center gap-3">
-                    <x-application-logo class="w-12 h-12 text-blue-500" />
-                    <span class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Orbiter</span>
+                    <x-application-logo class="w-10 h-10" style="color: var(--o-accent);" />
+                    <span class="text-2xl font-bold tracking-tight" style="color: var(--o-text);">Orbiter</span>
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-700/50 shadow-md overflow-hidden sm:rounded-xl">
+            <div class="w-full sm:max-w-md px-8 py-6 surface-elevated">
                 {{ $slot }}
             </div>
+
+            <p class="mt-6 text-xs" style="color: var(--o-text-4);">
+                Open source — MIT License
+            </p>
         </div>
     </body>
 </html>

@@ -31,7 +31,7 @@
                     <label for="module_id" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Module</label>
                     <select name="module_id" id="module_id" class="input-field">
                         <option value="">—</option>
-                        @foreach($modules as $m) <option value="{{ $m->id }}" {{ old('module_id') == $m->id ? 'selected' : '' }}>{{ $m->name }}</option> @endforeach
+                        @foreach($modules as $m) <option value="{{ $m->id }}" {{ old('module_id', request('module_id')) == $m->id ? 'selected' : '' }}>{{ $m->name }}</option> @endforeach
                     </select>
                 </div>
                 <div>
@@ -45,7 +45,7 @@
                     <label for="requirement_id" class="block text-sm font-medium mb-1" style="color: var(--o-text-2);">Exigence liée</label>
                     <select name="requirement_id" id="requirement_id" class="input-field">
                         <option value="">—</option>
-                        @foreach($requirements as $r) <option value="{{ $r->id }}" {{ old('requirement_id') == $r->id ? 'selected' : '' }}>{{ $r->ref }} — {{ Str::limit($r->title, 40) }}</option> @endforeach
+                        @foreach($requirements as $r) <option value="{{ $r->id }}" {{ old('requirement_id', request('requirement_id')) == $r->id ? 'selected' : '' }}>{{ $r->ref }} — {{ Str::limit($r->title, 40) }}</option> @endforeach
                     </select>
                 </div>
                 <div>
