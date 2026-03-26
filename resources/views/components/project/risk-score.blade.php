@@ -2,29 +2,24 @@
 
 @php
 if (is_null($score)) {
-    $color = 'text-slate-500';
-    $bg = 'bg-slate-500/10';
+    $badgeClass = 'badge badge-gray';
     $label = 'N/A';
 } elseif ($score >= 60) {
-    $color = 'text-red-400';
-    $bg = 'bg-red-500/10';
+    $badgeClass = 'badge badge-red';
     $label = 'Critique';
 } elseif ($score >= 30) {
-    $color = 'text-amber-400';
-    $bg = 'bg-amber-500/10';
+    $badgeClass = 'badge badge-orange';
     $label = 'Élevé';
 } elseif ($score >= 15) {
-    $color = 'text-blue-400';
-    $bg = 'bg-blue-500/10';
+    $badgeClass = 'badge badge-blue';
     $label = 'Modéré';
 } else {
-    $color = 'text-emerald-400';
-    $bg = 'bg-emerald-500/10';
+    $badgeClass = 'badge badge-green';
     $label = 'Faible';
 }
 @endphp
 
-<span {{ $attributes->merge(['class' => "inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-mono $color $bg"]) }}>
+<span {{ $attributes->merge(['class' => "$badgeClass font-mono"]) }}>
     <span class="font-bold">{{ $score ?? '—' }}</span>
-    <span class="text-[10px] opacity-75">{{ $label }}</span>
+    <span class="text-[10px] opacity-75 ml-0.5">{{ $label }}</span>
 </span>

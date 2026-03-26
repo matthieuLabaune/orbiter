@@ -1,12 +1,12 @@
 @props(['status'])
 
 @php
-$styles = [
-    'validated' => 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-    'verified' => 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-    'in_test' => 'bg-amber-500/20 text-amber-400 border-amber-500/30',
-    'untested' => 'bg-slate-500/20 text-slate-400 border-slate-500/30',
-    'failed' => 'bg-red-500/20 text-red-400 border-red-500/30',
+$classes = [
+    'validated' => 'badge badge-green',
+    'verified' => 'badge badge-blue',
+    'in_test' => 'badge badge-orange',
+    'untested' => 'badge badge-gray',
+    'failed' => 'badge badge-red',
 ];
 $labels = [
     'validated' => 'Validé',
@@ -17,6 +17,6 @@ $labels = [
 ];
 @endphp
 
-<span {{ $attributes->merge(['class' => 'inline-block px-2 py-0.5 rounded-full text-xs font-medium border ' . ($styles[$status] ?? '')]) }}>
+<span {{ $attributes->merge(['class' => $classes[$status] ?? 'badge badge-gray']) }}>
     {{ $labels[$status] ?? $status }}
 </span>
