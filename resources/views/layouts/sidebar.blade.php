@@ -61,6 +61,7 @@
                 $p = $currentProject;
                 $mainLinks = array_merge($mainLinks, [
                     ['route' => route('projects.modules.index', $p), 'routeIs' => 'projects.modules.*', 'icon' => 'boxes', 'label' => 'Modules'],
+                    ['route' => route('projects.user-stories.index', $p), 'routeIs' => 'projects.user-stories.*', 'icon' => 'book-open', 'label' => 'User Stories'],
                     ['route' => route('projects.requirements.index', $p), 'routeIs' => 'projects.requirements.*', 'icon' => 'list-checks', 'label' => 'Requirements'],
                     ['route' => route('projects.tests.index', $p), 'routeIs' => 'projects.tests.*', 'icon' => 'test-tubes', 'label' => 'Tests & V&V'],
                     ['route' => route('projects.tasks.index', $p), 'routeIs' => 'projects.tasks.*', 'icon' => 'gantt-chart', 'label' => 'Planning'],

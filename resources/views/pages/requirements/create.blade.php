@@ -36,14 +36,9 @@
                     @error('module_id') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
                 </div>
 
-                <div>
-                    <label for="type" class="block text-sm font-medium mb-1" style="color: var(--o-text-4);">Type</label>
-                    <select name="type" id="type" required class="w-full input-field">
-                        @foreach(['requirement' => 'Requirement', 'user_story' => 'User Story', 'constraint' => 'Contrainte', 'interface' => 'Interface'] as $val => $label)
-                            <option value="{{ $val }}" {{ old('type', 'requirement') == $val ? 'selected' : '' }}>{{ $label }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                @if(request('user_story_id'))
+                    <input type="hidden" name="user_story_id" value="{{ request('user_story_id') }}">
+                @endif
 
                 <div>
                     <label for="priority" class="block text-sm font-medium mb-1" style="color: var(--o-text-4);">Priorité</label>

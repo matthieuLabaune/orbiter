@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Task extends Model
 {
     protected $fillable = [
-        'project_id', 'module_id', 'requirement_id', 'title', 'description',
+        'project_id', 'module_id', 'requirement_id', 'user_story_id', 'title', 'description',
         'assignee_id', 'status', 'progress', 'start_date', 'end_date',
     ];
 
@@ -34,6 +34,11 @@ class Task extends Model
     public function requirement(): BelongsTo
     {
         return $this->belongsTo(Requirement::class);
+    }
+
+    public function userStory(): BelongsTo
+    {
+        return $this->belongsTo(UserStory::class);
     }
 
     public function assignee(): BelongsTo
