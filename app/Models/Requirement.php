@@ -14,7 +14,7 @@ class Requirement extends Model
     use HasSequentialRef;
 
     protected $fillable = [
-        'project_id', 'module_id', 'ref', 'title', 'description',
+        'project_id', 'module_id', 'type', 'ref', 'title', 'description',
         'acceptance_criteria', 'priority', 'vv_status', 'version',
         'risk_impact', 'risk_probability', 'risk_detectability',
     ];

@@ -32,6 +32,7 @@ it('creates a requirement with auto ref', function () {
     $this->actingAs($this->user)
         ->post(route('projects.requirements.store', $this->project), [
             'title' => 'New Requirement',
+            'type' => 'requirement',
             'module_id' => $this->module->id,
             'priority' => 'P1',
         ])
@@ -54,6 +55,7 @@ it('creates version on update', function () {
     $this->actingAs($this->user)
         ->put(route('projects.requirements.update', [$this->project, $req]), [
             'title' => 'Updated Title',
+            'type' => 'requirement',
             'module_id' => $this->module->id,
             'priority' => 'P1',
             'change_reason' => 'Clarification',
