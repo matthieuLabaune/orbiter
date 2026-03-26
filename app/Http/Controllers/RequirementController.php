@@ -32,7 +32,7 @@ class RequirementController extends Controller
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'type' => ['required', 'in:requirement,user_story,constraint,interface'],
+            'user_story_id' => ['nullable', 'exists:user_stories,id'],
             'description' => ['nullable', 'string'],
             'acceptance_criteria' => ['nullable', 'string'],
             'module_id' => ['required', 'exists:modules,id'],
@@ -81,7 +81,7 @@ class RequirementController extends Controller
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'type' => ['required', 'in:requirement,user_story,constraint,interface'],
+            'user_story_id' => ['nullable', 'exists:user_stories,id'],
             'description' => ['nullable', 'string'],
             'acceptance_criteria' => ['nullable', 'string'],
             'module_id' => ['required', 'exists:modules,id'],

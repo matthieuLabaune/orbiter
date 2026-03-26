@@ -36,6 +36,11 @@ class Project extends Model
         return $this->hasMany(Module::class);
     }
 
+    public function userStories(): HasMany
+    {
+        return $this->hasMany(UserStory::class);
+    }
+
     public function requirements(): HasMany
     {
         return $this->hasMany(Requirement::class);

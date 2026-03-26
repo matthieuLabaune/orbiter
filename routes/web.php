@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMemberController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\UserStoryController;
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestExecutionController;
@@ -38,6 +39,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Modules
     Route::resource('projects.modules', ModuleController::class);
+
+    // User Stories
+    Route::resource('projects.user-stories', UserStoryController::class);
 
     // Requirements
     Route::resource('projects.requirements', RequirementController::class);
